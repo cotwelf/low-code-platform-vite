@@ -32,7 +32,8 @@
   },
   "include": [
     "./src",
-    ".eslintrc.cjs"
+    ".eslintrc.cjs",
+    "vite-env.d.ts"  
   ],
   "references": [
     { 
