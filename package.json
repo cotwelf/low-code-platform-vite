@@ -7,7 +7,7 @@
     "build": "tsc && vite build --mode production",
     "preview": "vite preview",
     "lint:script": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src",
-    "lint:style": "stylelint --fix --custom-syntax postcss-less \"src/**/*.{css,less,scss}\"", 
+    "lint:style": "stylelint --fix --custom-syntax postcss-less \"src/**/*.{css,less,scss}\"",
     "lint": "npm run lint:script && npm run lint:style",
     "prepare": "husky install"
   },
@@ -40,6 +40,7 @@
     "@commitlint/config-conventional": "^17.0.3",
     "@types/node": "^18.6.1",
     "@types/react": "^18.0.15",
+    "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
