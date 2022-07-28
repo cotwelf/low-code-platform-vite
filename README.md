@@ -41,9 +41,9 @@ pnpm run lint
 使用Husky + lint-staged 的 Git 提交工作流集成
 
 commit由两部分组成, 结构如下：
-```
-// type 指提交的类型
-// subject 指提交的摘要信息
+```sh
+# type 指提交的类型
+# subject 指提交的摘要信息
 <type>: <subject>
 ```
 常用的 type 值包括如下:
