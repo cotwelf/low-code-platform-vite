@@ -6,6 +6,7 @@
 - 框架：React 18 + Typescript + sass + acro ui
 - 打包工具：Vite
 - 代码规范：ESlint + prettier + stylelint + husky + lint-staged
+- 打包工具：vite
 - 包管理：pnpm
 
 ## 📦 Quick start
