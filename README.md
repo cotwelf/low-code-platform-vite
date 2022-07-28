@@ -38,9 +38,9 @@ pnpm run lint
 └── vite.config.ts
 ```
 ## :white_check_mark: Commit standards
-使用Husky + lint-staged 的 Git 提交工作流集成
+使用 Husky + lint-staged 的 Git 提交工作流集成
 
-commit由两部分组成, 结构如下：
+commit 由两部分组成, 结构如下：
 ```sh
 # type 指提交的类型
 # subject 指提交的摘要信息
