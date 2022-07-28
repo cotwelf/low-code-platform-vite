@@ -7,7 +7,7 @@
     "build": "tsc && vite build --mode production",
     "preview": "vite preview",
     "lint:script": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src",
-    "lint:style": "stylelint --fix --custom-syntax postcss-less \"src/**/*.{css,less,scss}\"",
+    "lint:style": "stylelint --fix --custom-syntax postcss-less \"src/**/*.{css,less,scss}\"", 
     "lint": "npm run lint:script && npm run lint:style",
     "prepare": "husky install"
   },
