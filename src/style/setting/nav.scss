@@ -1,0 +1,37 @@
+.low-code-layout .nav {
+  height: calc(100vh - 60px);
+
+  .menu {
+    padding-top: 10px;
+
+    > div {
+      padding: 0;
+    }
+
+    .menu-header {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+
+      > div:first-child {
+        background-color: $grey-lighter;
+      }
+    }
+  }
+
+  &.nav-left .component-list {
+    padding: 2px;
+  }
+
+  &.nav-right {
+    .component-info {
+      padding: 20px 5px 0;
+    }
+
+    .form {
+      width: 90%;
+      margin: 20px auto 0;
+      text-align: left;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.low-code-layout .content {
+  > div {
+    margin: 60px auto 0;
+  }
+
+  &.h5 {
+    .canvas {
+      width: 375px;
+      height: 667px;
+      background-color: $grey-lighter;
+      border: 1px solid $blue-base;
+    }
+  }
+}

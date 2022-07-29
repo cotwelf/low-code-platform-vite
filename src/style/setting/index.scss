@@ -1,0 +1,36 @@
+@import '../variables';
+@import './header';
+@import './content';
+@import './nav.scss';
+
+.low-code-container.arco-layout {
+  flex-direction: row;
+}
+
+.low-code-layout {
+  width: 100vw;
+  height: 100vh;
+  color: $grey-base;
+
+  .dom-tree {
+    padding: 10px;
+
+    .arco-tree-node-title.arco-tree-node-title-draggable {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+
+      .arco-tree-node-icon.arco-tree-node-drag-icon {
+        margin-left: 0;
+      }
+    }
+  }
+
+  .hightlight {
+    color: $blue-base;
+  }
+
+  background-image: repeating-linear-gradient($grey-light 0 8px, $transparent 0 16px),
+    repeating-linear-gradient(90deg, $grey-light 0 8px, $transparent 0 16px);
+  background-blend-mode: screen;
+}
