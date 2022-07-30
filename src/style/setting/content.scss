@@ -5,6 +5,7 @@
 
   &.h5 {
     .canvas {
+      position: relative;
       width: 375px;
       height: 667px;
       background-color: $grey-lighter;
