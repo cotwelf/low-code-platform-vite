@@ -1,3 +1,4 @@
 export const COMPONENT_NAME = {
-  LCBUTTON: 'LCButton'
+  LCBUTTON: 'LCButton',
+  LCIMAGE: 'LCImage'
 }

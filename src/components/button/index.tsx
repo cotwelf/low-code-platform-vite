@@ -1,7 +1,6 @@
-import { ResizeComponent } from '@//utils/components/resize-component';
+import { Resizer } from '@//utils/components/resize-box/resizer';
 import { ILCElementConfig } from '@//vite-env'
 import React, { useEffect } from 'react'
-import './test.scss'
 
 const LCButton = (props: ILCElementConfig) => {
 
@@ -9,9 +8,9 @@ const LCButton = (props: ILCElementConfig) => {
     console.log()
   }, [props.style])
   return (
-    <ResizeComponent style={props.style}>
-      <button id={props.id}></button>
-    </ResizeComponent>
+    <Resizer width={props.style.width} height={props.style.height}>
+      <button id={props.id} style={props.style}>{props.innerText}</button>
+    </Resizer>
   )
 }
 

@@ -25,6 +25,12 @@ const Sider = Layout.Sider;
 export const NavLeft = ({ updateRenderList }: {
   updateRenderList: (ele: IComponentItem) => void
 }) => {
+
+  const addToRenderList = (element: IComponentItem) => {
+    const renderElement = {...element}
+    renderElement.id = Date.now().toString(16).toLocaleUpperCase()
+    updateRenderList(renderElement)
+  }
   return (
     <Sider
         collapsed={false}
@@ -67,7 +73,7 @@ export const NavLeft = ({ updateRenderList }: {
                           <Card
                             style={{ width: '100%' }}
                             bordered={false}
-                            onClick={() => updateRenderList(component)}
+                            onClick={() => addToRenderList(component)}
                           >
                             {component.name}
                           </Card>

@@ -9,7 +9,6 @@ import { IComponentItem } from '@//vite-env';
 const LowCodeLayout = () => {
   const [renderList, setRenderList] = useState<Array<IComponentItem>>([])
   const updateRenderList = (element: IComponentItem) => {
-    element.id = Date.now().toString(16)
     setRenderList([...renderList, element])
   }
   return (
