@@ -53,7 +53,7 @@ export const NavLeft = ({ updateRenderList }: {
             <Card bordered={false} className="component-list">
               {components_list.map((component, index) => (
                 <Grid
-                  key={`${index}${component.name}`}
+                  key={`${index}${component.label}`}
                   hoverable={true}
                   style={{
                     width: '50%',
@@ -75,7 +75,7 @@ export const NavLeft = ({ updateRenderList }: {
                             bordered={false}
                             onClick={() => addToRenderList(component)}
                           >
-                            {component.name}
+                            {component.label}
                           </Card>
                         {/* </div>
                       )}

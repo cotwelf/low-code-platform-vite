@@ -4,12 +4,14 @@ import * as DEFAULT_CONFIG from './button/default-config.json'
 
 export const components_list: IComponentItem[] = [
   {
-    name: '按钮组件',
+    label: '按钮组件',
+    type: 'button',
     config: DEFAULT_CONFIG,
     getComponent: getLCButton
   },
   {
-    name: '按钮组件 1',
+    label: '按钮组件 1',
+    type: 'button',
     config: DEFAULT_CONFIG,
     getComponent: getLCButton
   }
