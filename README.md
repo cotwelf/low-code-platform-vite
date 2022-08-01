@@ -1,6 +1,7 @@
 # low-code-platform-vite
 ## ✨ Features
 - 极致的性能优化（代码压缩，产物 tree-shaking 等）
+- 暗黑模式
 
 ## :rocket: Technologies
 - 框架：React 18 + Typescript + sass + acro ui
