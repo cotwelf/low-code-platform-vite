@@ -22,6 +22,15 @@
   &.nav-left .component-list {
     padding: 2px;
     cursor: grab;
+
+    .arco-card-size-default {
+      &:hover {
+        background-color: $blue-base-70;
+        .arco-card-body {
+          color: $white;
+        }
+      }
+    }
   }
 
   &.nav-right {
@@ -33,6 +42,22 @@
       width: 90%;
       margin: 20px auto 0;
       text-align: left;
+
+      /* label */
+      .arco-form-item > .arco-form-label-item {
+        flex: 0 0 30%;
+      }
+
+      /* input */
+      .arco-col.arco-col-19.arco-form-item-wrapper {
+        flex: 0 0 70%;
+      }
+    }
+
+    .pick-color {
+      width: 25px;
+      height: 25px;
+      margin: 2px;
     }
   }
 }

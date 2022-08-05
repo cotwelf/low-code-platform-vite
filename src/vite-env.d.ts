@@ -33,10 +33,24 @@ export interface IComponentConfig {
   componentId: string // 对应组件库的组件 id
   name?: string
   class?: string
-  style: React.CSSProperties
+  style: IStyleProperties
   attributes?: IAttributes
   innerText?: string
   parentid?: string
   childrens?: string[]
   setting?: boolean
+}
+
+export interface IStyleProperties {
+  width?: string
+  height?: string
+  left?: string
+  top?: string
+  borderRadius?: string
+  color?: string
+  backgroundColor?: string
+  paddingTop?: string
+  paddingRight?: string
+  paddingBottom?: string
+  paddingLeft?: string
 }

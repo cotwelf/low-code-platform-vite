@@ -22,9 +22,9 @@ export const Resizer: React.FC<IResizer> = ({ componentConfig, children }) => {
   const { updateRenderList } = useContext(context)
 
   const boxRef = useRef()
-  const onUpdateSize = ({width, height} : {width: number, height: number}) => {
+  const onUpdateSize = ({ width, height } : {width: number, height: number}) => {
     const newConfig = {...componentConfig}
-    newConfig.style = {...newConfig.style, width, height}
+    newConfig.style = {...newConfig.style, width: `${width}px`, height: `${height}px`}
     if (updateRenderList) {
       updateRenderList(newConfig)
     }
@@ -36,7 +36,9 @@ export const Resizer: React.FC<IResizer> = ({ componentConfig, children }) => {
       ref={boxRef}
       style={{
         width: `calc(${componentConfig.style.width} - 2px)`,
-        height: `calc(${componentConfig.style.height} - 2px)`
+        height: `calc(${componentConfig.style.height} - 2px)`,
+        top: componentConfig.style.top || 0,
+        left: componentConfig.style.left || 0
       }}
       onMoving={(e, size) => onUpdateSize({ width: size.width, height: size.height })}
       resizeTriggers={{

@@ -55,20 +55,16 @@ export const NavRight = () => {
             <Form
               form={form}
               className={'form'}
-              // initialValues={currentConfig.style}
-              onChange={(v, vs) => {
-                console.log(v, vs, 'jjjj');
-                updateRenderList({...currentConfig, style: vs, setting: true})
+              onValuesChange={(v, vs) => {
+                if (JSON.stringify(vs) !== JSON.stringify(currentConfig.style)) {
+                  updateRenderList({...currentConfig, style: vs, setting: true})
+                }
               }}
             >
-              {Object.keys(currentConfig.style).map((key) => {
-                console.log(key,formItem[key],'formItem[key]')
-                return formItem[key] ? formItem[key]({field: key}) : null
-                // return (
-                //   <FormItem label={key} field={key} key={`${key}${index}`}>
-                //     <Input placeholder='namennnname' />
-                //   </FormItem>
-                // )
+              {Object.keys(currentConfig.style).map((key, index) => {
+                return formItem[key] ? (
+                  formItem[key]({field: key, value: currentConfig.style[key], key: `${index}${key}`, form: form})
+                ): null
               })}
           </Form>
           </CollapseItem>

@@ -8,8 +8,8 @@ const DEFAULT_CONFIG = {
   name: '按钮组件',
   innerText: '按钮文字',
   style: {
-    left: '0',
-    top: '0',
+    left: '10px',
+    top: '20px',
     width: '100px',
     height: '100px',
     borderRadius: '4px',

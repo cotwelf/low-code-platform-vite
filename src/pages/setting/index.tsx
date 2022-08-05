@@ -8,7 +8,7 @@ import { IComponentConfig } from '@//vite-env';
 
 export const context = React.createContext<Partial<{
   renderList: IComponentConfig[]
-  updateRenderList: (config: IComponentConfig) => void
+  updateRenderList: (config: IComponentConfig, force?: boolean) => void
 }>>({})
 
 const LowCodeLayout = () => {
@@ -18,7 +18,6 @@ const LowCodeLayout = () => {
       i.setting = false
       return i
     })
-    console.log(tempList, 'tempListtempList')
     if (!tempList.some((item) => item.id === config.id)) {
       setRenderList([...tempList, config])
       return

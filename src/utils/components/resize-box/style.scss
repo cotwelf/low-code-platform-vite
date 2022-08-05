@@ -1,3 +1,5 @@
+@import '../../../style/variables.scss';
+
 .resizebox-demo-custom-trigger {
   position: relative;
   display: flex;
@@ -12,13 +14,13 @@
 .resizebox-demo-custom-trigger::after {
   width: 6px;
   height: 6px;
-  border: 1px solid rgb(var(--cyan-5));
+  border: 1px solid $blue-base;
   content: '';
 }
 
 .resizebox-demo-custom-trigger-line {
   flex: 1;
-  background-color: rgb(var(--cyan-5));
+  background-color: $blue-base;
 }
 
 .resizebox-demo-custom-trigger-vertical {
@@ -37,5 +39,5 @@
 
 .resizer.arco-resizebox {
   position: absolute;
-  background: rgb(var(--cyan-5) 0.2);
+  background: $blue-base-20;
 }
