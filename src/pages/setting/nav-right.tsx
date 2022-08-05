@@ -1,17 +1,18 @@
-import { Button, Checkbox, Descriptions, Form, Input, Layout, Menu } from '@arco-design/web-react';
+import { Collapse, Descriptions, Form, Layout } from '@arco-design/web-react';
 import React, { useContext, useEffect, useState } from 'react'
 import { IconEdit } from '@arco-design/web-react/icon';
-import { formItem } from '@//utils/style-configs';
+// import { formItem } from '@//utils/style-configs';
 import { context } from '.';
 import { IComponentConfig } from '@//vite-env';
 import { components_list } from '@//components';
-const FormItem = Form.Item;
+import { formItem } from '@//utils/style-configs';
 
-const SubMenu = Menu.SubMenu;
+const CollapseItem = Collapse.Item;
+
 const Sider = Layout.Sider;
 
 export const NavRight = () => {
-  const { renderList } = useContext(context)
+  const { renderList, updateRenderList } = useContext(context)
   const [currentConfig, setCurrentConfig] = useState<IComponentConfig | null>(null)
   const [form] = Form.useForm()
   const componentInfo = [
@@ -29,10 +30,14 @@ export const NavRight = () => {
   ]
   useEffect(() => {
     const config = renderList?.find(i => i.setting)
-    if(config && (config?.id !== currentConfig?.id)) {
+    if(config) {
       setCurrentConfig(config)
+      form.setFieldsValue(config.style)
     }
   }, [renderList])
+  if (!currentConfig || !updateRenderList) {
+    return null
+  }
   return (
     <Sider
         collapsed={false}
@@ -42,61 +47,32 @@ export const NavRight = () => {
         className={'nav nav-right'}
       >
         <Descriptions className={'component-info'} size='large' layout='inline-vertical' data={componentInfo}  />
-        <Menu
-          defaultOpenKeys={['1', '2']}
-          defaultSelectedKeys={['0_1']}
-          style={{ width: '100%' }}
-          className="menu"
+        <Collapse
+          defaultActiveKey={'name2'}
+          expandIconPosition='right'
         >
-          <SubMenu
-            key='1'
-            title='基本属性'
-            className={'menu-header'}
-          >
+          <CollapseItem header='基本属性' name={'name2'}>
             <Form
               form={form}
               className={'form'}
-              initialValues={{ name: 'name'}}
-              onValuesChange={(v, vs) => {
-                console.log(v, vs);
+              // initialValues={currentConfig.style}
+              onChange={(v, vs) => {
+                console.log(v, vs, 'jjjj');
+                updateRenderList({...currentConfig, style: vs, setting: true})
               }}
             >
-              {formItem['width']({ field: 'name' })}
-              <FormItem label='Username'>
-                <Input placeholder='please enter your username...' />
-              </FormItem>
-              <FormItem label='Post'>
-                <Input placeholder='please enter your post...' />
-              </FormItem>
-              <FormItem wrapperCol={{ offset: 5 }}>
-                <Checkbox>I have read the manual</Checkbox>
-              </FormItem>
-              <FormItem wrapperCol={{ offset: 5 }}>
-                <Button type='primary'>Submit</Button>
-              </FormItem>
-            </Form>
-          </SubMenu>
-          <SubMenu
-          className={'menu-header'}
-            key='2'
-            title='基本样式'
-          >
-             <Form className={'form'}>
-              <FormItem label='Username'>
-                <Input placeholder='please enter your username...' />
-              </FormItem>
-              <FormItem label='Post'>
-                <Input placeholder='please enter your post...' />
-              </FormItem>
-              <FormItem wrapperCol={{ offset: 5 }}>
-                <Checkbox>I have read the manual</Checkbox>
-              </FormItem>
-              <FormItem wrapperCol={{ offset: 5 }}>
-                <Button type='primary'>Submit</Button>
-              </FormItem>
-            </Form>
-          </SubMenu>
-        </Menu>
+              {Object.keys(currentConfig.style).map((key) => {
+                console.log(key,formItem[key],'formItem[key]')
+                return formItem[key] ? formItem[key]({field: key}) : null
+                // return (
+                //   <FormItem label={key} field={key} key={`${key}${index}`}>
+                //     <Input placeholder='namennnname' />
+                //   </FormItem>
+                // )
+              })}
+          </Form>
+          </CollapseItem>
+        </Collapse>
       </Sider>
   )
 }

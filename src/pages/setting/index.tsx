@@ -42,7 +42,6 @@ const LowCodeLayout = () => {
         </Layout>
       </Layout>
     </context.Provider>
-
   )
 }
 

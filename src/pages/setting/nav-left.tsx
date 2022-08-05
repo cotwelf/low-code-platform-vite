@@ -1,4 +1,4 @@
-import { Card, Layout, Menu, Tree } from '@arco-design/web-react';
+import { Card, Collapse, Layout, Tree } from '@arco-design/web-react';
 import { treeData } from '../../../public/test-data'
 import { components_list } from '@//components';
 import React, { useContext } from 'react'
@@ -6,9 +6,9 @@ import { IComponentConfig, IComponentItem } from '@//vite-env';
 import { context } from '.';
 // import { DragDropContext, Draggable } from 'react-beautiful-dnd';
 
-const SubMenu = Menu.SubMenu;
 const { Grid } = Card;
 const Sider = Layout.Sider;
+const CollapseItem = Collapse.Item;
 
 // const getItemStyle = (isDragging: any, draggableStyle: any) => ({
 //   // some basic styles to make the items look a bit nicer
@@ -46,23 +46,19 @@ export const NavLeft = () => {
         width={260}
         className={'nav nav-left'}
       >
-        <Menu
-          defaultOpenKeys={['1', '2']}
-          style={{ width: '100%' }}
-          className="menu"
+        <Collapse
+          defaultActiveKey={['components', 'structure']}
+          expandIconPosition='right'
         >
-          <SubMenu
-            key='1'
-            title='组件列表'
-            className={'menu-header'}
-          >
-            <Card bordered={false} className="component-list">
+          <CollapseItem header='组件列表' name={'components'}>
+          <Card bordered={false} className="component-list">
               {components_list.map((component, index) => (
                 <Grid
                   key={`${index}${component.label}`}
                   hoverable={true}
                   style={{
                     width: '50%',
+                    textAlign: 'center',
                   }}
                 >
                     {/* <Draggable draggableId={`${index}${component.name}`} index={1}>
@@ -89,22 +85,17 @@ export const NavLeft = () => {
                 </Grid>
               ))}
             </Card>
-          {/* </DragDropContext> */}
-          </SubMenu>
-          <SubMenu
-          className={'menu-header'}
-            key='2'
-            title='页面结构'
-          >
+          </CollapseItem>
+          <CollapseItem header='页面结构' name={'structure'}>
             <Tree
               defaultSelectedKeys={['0-0-1']}
               draggable={true}
               treeData={treeData} showLine={true}
               className={'dom-tree'}
-            >
-            </Tree>
-          </SubMenu>
-        </Menu>
+              >
+              </Tree>
+          </CollapseItem>
+        </Collapse>
       </Sider>
   )
 }
