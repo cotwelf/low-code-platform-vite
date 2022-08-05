@@ -1,8 +1,9 @@
 import { Card, Layout, Menu, Tree } from '@arco-design/web-react';
 import { treeData } from '../../../public/test-data'
 import { components_list } from '@//components';
-import React from 'react'
-import { IComponentItem } from '@//vite-env';
+import React, { useContext } from 'react'
+import { IComponentConfig, IComponentItem } from '@//vite-env';
+import { context } from '.';
 // import { DragDropContext, Draggable } from 'react-beautiful-dnd';
 
 const SubMenu = Menu.SubMenu;
@@ -22,14 +23,20 @@ const Sider = Layout.Sider;
 //   ...draggableStyle
 // });
 
-export const NavLeft = ({ updateRenderList }: {
-  updateRenderList: (ele: IComponentItem) => void
-}) => {
-
-  const addToRenderList = (element: IComponentItem) => {
-    const renderElement = {...element}
-    renderElement.id = Date.now().toString(16).toLocaleUpperCase()
-    updateRenderList(renderElement)
+export const NavLeft = () => {
+  const { renderList, updateRenderList } = useContext(context)
+  // 添加组件库里的组件到 content，初始化数据，开始配置
+  const addToRenderList = (componentItem: IComponentItem) => {
+    if (!updateRenderList || !renderList) {
+      return
+    }
+    const config:IComponentConfig = {
+      ...componentItem.defaultConfig,
+      id: Date.now().toString(16).toLocaleUpperCase(),
+      componentId: componentItem.id,
+      setting: true,
+    }
+    updateRenderList(config)
   }
   return (
     <Sider
@@ -49,7 +56,6 @@ export const NavLeft = ({ updateRenderList }: {
             title='组件列表'
             className={'menu-header'}
           >
-          {/* <DragDropContext onDragEnd={() => console.log('end')}> */}
             <Card bordered={false} className="component-list">
               {components_list.map((component, index) => (
                 <Grid

@@ -1,10 +1,4 @@
-import { COMPONENT_NAME } from './utils/const';
 /// <reference types="vite/client" />
-
-// enum ICOMPONENT_NAME {
-//   LCBUTTON = COMPONENT_NAME.LCBUTTON,
-//   LCIMAGE = COMPONENT_NAME.LCIMAGE,
-// }
 
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
@@ -23,20 +17,26 @@ export interface IAttributes {
   alt?: string
   title?: string
 }
-export interface ILCElementConfig {
-  id: string
-  name?: COMPONENT_NAME.LC_BUTTON | COMPONENT_NAME.LC_IMAGE
-  style: React.CSSProperties
-  innerText: string
-  parentid?: string
-  childrens?: string[]
+
+// --组件库--
+export interface IComponentItem {
+  id: string // 组件 id，唯一
+  type: string
+  label: string // 左侧组件按钮上显示的文字
+  getComponent: (props?: IComponentConfig) => JSX.Element
+  defaultConfig: IComponentConfig // 默认配置
 }
 
-export interface IComponentItem {
-  id?: string
-  type: 'button' | 'img' | 'div'
-  label: string
-  getComponent: (props?: ILCElementConfig) => JSX.Element
-  config?: ILCElementConfig
+// --组件配置（in renderList）--
+export interface IComponentConfig {
+  id: string
+  componentId: string // 对应组件库的组件 id
+  name?: string
+  class?: string
+  style: React.CSSProperties
   attributes?: IAttributes
+  innerText?: string
+  parentid?: string
+  childrens?: string[]
+  setting?: boolean
 }

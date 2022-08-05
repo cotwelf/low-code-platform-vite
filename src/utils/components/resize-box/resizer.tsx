@@ -1,7 +1,13 @@
+import { context } from '@//pages/setting';
+import { IComponentConfig } from '@//vite-env';
 import { ResizeBox } from '@arco-design/web-react';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import './style.scss'
 
+interface IResizer {
+  componentConfig: IComponentConfig
+  children: React.ReactNode
+}
 const TriggerContent = function ({ className }: {
   className: string
 }) {
@@ -12,33 +18,30 @@ const TriggerContent = function ({ className }: {
   );
 };
 
-export const Resizer = ({ width, height, children } : {
-  width: string
-  height: string
-  children: React.ReactNode
-}) => {
-  const [ currentWidth, setCurrentWidth ] = useState(width)
-  const [ currentHeight, setCurrentHeight ] = useState(height)
-  const boxRef = useRef()
+export const Resizer: React.FC<IResizer> = ({ componentConfig, children }) => {
+  const { updateRenderList } = useContext(context)
 
-  const resizeEnd = () => {
-    console.log(currentWidth, currentHeight)
+  const boxRef = useRef()
+  const onUpdateSize = ({width, height} : {width: number, height: number}) => {
+    const newConfig = {...componentConfig}
+    newConfig.style = {...newConfig.style, width, height}
+    if (updateRenderList) {
+      updateRenderList(newConfig)
+    }
   }
   return (
     <ResizeBox
       directions={['right', 'bottom']}
       className="resizer"
       ref={boxRef}
-      onMovingEnd={resizeEnd}
-      style={{width: `calc(${currentWidth} - 2px)`, height: `calc(${currentHeight} - 2px)`}}
-      onMoving={(e, size) => {
-        console.log(size)
-        setCurrentWidth(`${size.width}px`)
-        setCurrentHeight(`${size.height}px`)
+      style={{
+        width: `calc(${componentConfig.style.width} - 2px)`,
+        height: `calc(${componentConfig.style.height} - 2px)`
       }}
+      onMoving={(e, size) => onUpdateSize({ width: size.width, height: size.height })}
       resizeTriggers={{
-        right: <TriggerContent className='resizebox-demo-custom-trigger-vertical' />,
-        bottom: <TriggerContent className='resizebox-demo-custom-trigger-horizontal' />,
+        right: componentConfig.setting ? <TriggerContent className='resizebox-demo-custom-trigger-vertical' /> : <span />,
+        bottom: componentConfig.setting ? <TriggerContent className='resizebox-demo-custom-trigger-horizontal' /> : <span />,
       }}
     >
       {children}
