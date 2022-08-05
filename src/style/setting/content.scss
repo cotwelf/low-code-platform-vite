@@ -8,9 +8,10 @@
       position: relative;
       width: 375px;
       height: 667px;
-      background-color: $grey-lighter;
       overflow: auto;
+      background-color: $grey-lighter;
       box-shadow: 0 1px 6px $grey-base;
+
       &.active {
         border: 1px solid $blue-base;
       }

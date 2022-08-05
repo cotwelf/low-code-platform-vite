@@ -7,7 +7,7 @@ const FormItem = Form.Item;
 interface IFormItemProps {
   field: string
   key?: string
-  value?: IStyleProperties
+  value?: [IStyleProperties] // TODO
   form?: FormInstance
 }
 export interface IFormItem {

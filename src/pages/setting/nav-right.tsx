@@ -1,9 +1,8 @@
 import { Collapse, Descriptions, Form, Layout } from '@arco-design/web-react';
 import React, { useContext, useEffect, useState } from 'react'
 import { IconEdit } from '@arco-design/web-react/icon';
-// import { formItem } from '@//utils/style-configs';
 import { context } from '.';
-import { IComponentConfig } from '@//vite-env';
+import { IComponentConfig, IStyleProperties } from '@//vite-env';
 import { components_list } from '@//components';
 import { formItem } from '@//utils/style-configs';
 
@@ -38,6 +37,11 @@ export const NavRight = () => {
   if (!currentConfig || !updateRenderList) {
     return null
   }
+  const handleValue = (value: IStyleProperties) => {
+    if (JSON.stringify(value) !== JSON.stringify(currentConfig.style)) {
+      updateRenderList({...currentConfig, style: value, setting: true})
+    }
+  }
   return (
     <Sider
         collapsed={false}
@@ -55,11 +59,7 @@ export const NavRight = () => {
             <Form
               form={form}
               className={'form'}
-              onValuesChange={(v, vs) => {
-                if (JSON.stringify(vs) !== JSON.stringify(currentConfig.style)) {
-                  updateRenderList({...currentConfig, style: vs, setting: true})
-                }
-              }}
+              onValuesChange={(v, vs) => handleValue(vs)}
             >
               {Object.keys(currentConfig.style).map((key, index) => {
                 return formItem[key] ? (

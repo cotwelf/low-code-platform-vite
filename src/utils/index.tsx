@@ -2,12 +2,19 @@ export * from './toggle-modal'
 
 export const splitAfterNumber = (str?: string) => {
   if (!str) {
-    return
+    return {
+      value: str,
+    }
   }
-  const number = parseInt(str)
-  const unit = str.replace(number.toString(), '')
+  const value = parseInt(str)
+  if (value.toString() === 'NaN') {
+    return {
+      value: str,
+    }
+  }
+  const unit = str.replace(value.toString(), '')
   return {
-    number,
+    value,
     unit
   }
 }

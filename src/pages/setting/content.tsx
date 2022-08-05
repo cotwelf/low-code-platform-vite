@@ -6,7 +6,6 @@ import { components_list } from '@//components';
 import { IComponentConfig } from '@//vite-env';
 import { DragBox } from '@//utils/components/drag-box';
 import { splitAfterNumber } from '@//utils';
-// import { useEffect } from 'react';
 const Content = Layout.Content;
 
 export const LowCodeContent = () => {
@@ -39,9 +38,15 @@ export const LowCodeContent = () => {
                   return
                 }
                 const style = {...item.style}
-                style.top = `${prevTop.number + yDiff}${prevTop.unit}`
-                style.left = `${prevLeft.number + xDiff}${prevLeft.unit}`
-                const currentItem = {...item, style}
+                if (prevLeft.value && prevTop.value && typeof prevLeft.value !== 'string' && typeof prevTop.value !== 'string') {
+                  style.top = `${prevTop.value + yDiff}${prevTop.unit}`
+                  style.left = `${prevLeft.value + xDiff}${prevLeft.unit}`
+                } else {
+                  style.top = `${prevTop.value}`
+                  style.left = `${prevLeft.value}`
+                }
+
+                const currentItem: IComponentConfig = {...item, style: style}
                 handleUpdate(currentItem)
               }}
               onMoveStart={() => {

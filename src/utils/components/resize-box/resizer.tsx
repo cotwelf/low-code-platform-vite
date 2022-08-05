@@ -35,8 +35,8 @@ export const Resizer: React.FC<IResizer> = ({ componentConfig, children }) => {
       className="resizer"
       ref={boxRef}
       style={{
-        width: `calc(${componentConfig.style.width} - 2px)`,
-        height: `calc(${componentConfig.style.height} - 2px)`,
+        width: componentConfig.style.width,
+        height: componentConfig.style.height,
         top: componentConfig.style.top || 0,
         left: componentConfig.style.left || 0
       }}

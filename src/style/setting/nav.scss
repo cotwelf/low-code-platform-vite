@@ -26,6 +26,7 @@
     .arco-card-size-default {
       &:hover {
         background-color: $blue-base-70;
+
         .arco-card-body {
           color: $white;
         }
