@@ -29,6 +29,7 @@ const LowCodeLayout = () => {
       }
       return item
     })
+    console.log(tempList, 'renderList')
     setRenderList(tempList)
   }
 

@@ -8,15 +8,10 @@ interface IResizer {
   componentConfig: IComponentConfig
   children: React.ReactNode
 }
-const TriggerContent = function ({ className }: {
+
+const TriggerContent = ({ className }: {
   className: string
-}) {
-  return (
-    <div className={`resizebox-demo-custom-trigger ${className}`}>
-      <div className='resizebox-demo-custom-trigger-line' />
-    </div>
-  );
-};
+}) => <div className={`resizebox-trigger ${className}`} />
 
 export const Resizer: React.FC<IResizer> = ({ componentConfig, children }) => {
   const { updateRenderList } = useContext(context)
@@ -33,17 +28,10 @@ export const Resizer: React.FC<IResizer> = ({ componentConfig, children }) => {
     <ResizeBox
       directions={['right', 'bottom']}
       className="resizer"
-      // ref={boxRef}
-      style={{
-        width: componentConfig.style.width,
-        height: componentConfig.style.height,
-        top: componentConfig.style.top || 0,
-        left: componentConfig.style.left || 0
-      }}
       onMoving={(e, size) => onUpdateSize({ width: size.width, height: size.height })}
       resizeTriggers={{
-        right: componentConfig.setting ? <TriggerContent className='resizebox-demo-custom-trigger-vertical' /> : <span />,
-        bottom: componentConfig.setting ? <TriggerContent className='resizebox-demo-custom-trigger-horizontal' /> : <span />,
+        right: componentConfig.setting ? <TriggerContent className='vertical' /> : <span />,
+        bottom: componentConfig.setting ? <TriggerContent className='horizontal' /> : <span />,
       }}
     >
       {children}

@@ -38,6 +38,10 @@ export const NavRight = () => {
     return null
   }
   const handleValue = (value: IStyleProperties) => {
+    const config = renderList?.find(i => i.setting)
+    if (currentConfig.id !== config?.id) {
+      return
+    }
     if (JSON.stringify(value) !== JSON.stringify(currentConfig.style)) {
       updateRenderList({...currentConfig, style: value, setting: true})
     }

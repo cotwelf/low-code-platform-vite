@@ -1,3 +1,7 @@
 @import './setting/index';
 @import './variables.scss';
 @import './reset-arco-style.scss';
+
+* {
+  box-sizing: border-box;
+}

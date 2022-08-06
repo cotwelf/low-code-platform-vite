@@ -1,5 +1,5 @@
-import { Card, Collapse, Layout, Tree } from '@arco-design/web-react';
-import { treeData } from '../../../public/test-data'
+import { Card, Collapse, Layout } from '@arco-design/web-react';
+// import { treeData } from '../../../public/test-data'
 import { components_list } from '@//components';
 import React, { useContext } from 'react'
 import { IComponentConfig, IComponentItem } from '@//vite-env';
@@ -13,6 +13,7 @@ export const NavLeft = () => {
   const { renderList, updateRenderList } = useContext(context)
   // 添加组件库里的组件到 content，初始化数据，开始配置
   const addToRenderList = (componentItem: IComponentItem) => {
+    console.log('addToRenderList')
     if (!updateRenderList || !renderList) {
       return
     }
@@ -22,6 +23,7 @@ export const NavLeft = () => {
       componentId: componentItem.id,
       setting: true,
     }
+    console.log(config, 'configconfig')
     updateRenderList(config)
   }
   return (
@@ -63,7 +65,7 @@ export const NavLeft = () => {
             ))}
           </Card>
           </CollapseItem>
-          <CollapseItem header='页面结构' name={'structure'}>
+          {/* <CollapseItem header='页面结构' name={'structure'}>
             <Tree
               defaultSelectedKeys={['0-0-1']}
               draggable={true}
@@ -71,7 +73,7 @@ export const NavLeft = () => {
               className={'dom-tree'}
               >
               </Tree>
-          </CollapseItem>
+          </CollapseItem> */}
         </Collapse>
       </Sider>
   )

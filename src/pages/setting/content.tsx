@@ -13,6 +13,7 @@ export const LowCodeContent = () => {
   const [canvasActive, setCanvasActive] = useState(false)
   const isMobile = true
   const renderComponent = (config: IComponentConfig)  => {
+    console.log(config, 'config')
     const component = components_list.filter((i) => i.id === config.componentId)[0]
     return component.getComponent(config)
   }
@@ -31,6 +32,8 @@ export const LowCodeContent = () => {
         >
           {renderList && renderList.length > 0 && renderList.map((item: IComponentConfig) => (
             <DragBox
+              style={item.style}
+              onClick={() => handleUpdate({...item})}
               onMoving={({xDiff, yDiff}) => {
                 const prevTop = splitAfterNumber(item.style.top)
                 const prevLeft = splitAfterNumber(item.style.left)
@@ -40,7 +43,6 @@ export const LowCodeContent = () => {
                 const style = {...item.style}
                 style.top = `${prevTop.value + yDiff}${prevTop.unit}`
                 style.left = `${prevLeft.value + xDiff}${prevLeft.unit}`
-                console.log(style,'style')
                 const currentItem: IComponentConfig = {...item, style: style}
                 handleUpdate(currentItem)
               }}
