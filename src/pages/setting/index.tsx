@@ -14,18 +14,20 @@ export const context = React.createContext<Partial<{
 const LowCodeLayout = () => {
   const [renderList, setRenderList] = useState<Array<IComponentConfig>>([])
   const updateRenderList = (config: IComponentConfig) => {
-    const tempList = renderList.map(i => {
+    let tempList = renderList.map(i => {
       i.setting = false
       return i
     })
+
     if (!tempList.some((item) => item.id === config.id)) {
       setRenderList([...tempList, config])
       return
     }
-    tempList.forEach((item, index) => {
+    tempList = tempList.map((item) => {
       if (item.id === config.id) {
-        tempList[index] = config
+        return config
       }
+      return item
     })
     setRenderList(tempList)
   }

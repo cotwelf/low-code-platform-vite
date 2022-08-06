@@ -1,13 +1,12 @@
 import { Form, FormInstance, Input, Popover } from '@arco-design/web-react';
 import { ChromePicker } from 'react-color'
 import React, { useState } from 'react'
-import { IStyleProperties } from '../vite-env';
 const FormItem = Form.Item;
 
 interface IFormItemProps {
   field: string
   key?: string
-  value?: [IStyleProperties] // TODO
+  value?: string // TODO
   form?: FormInstance
 }
 export interface IFormItem {

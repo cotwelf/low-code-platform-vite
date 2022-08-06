@@ -22,7 +22,7 @@ export const NavLeft = () => {
       componentId: componentItem.id,
       setting: true,
     }
-    updateRenderList(config, )
+    updateRenderList(config)
   }
   return (
     <Sider

@@ -1,7 +1,7 @@
 import { context } from '@//pages/setting';
 import { IComponentConfig } from '@//vite-env';
 import { ResizeBox } from '@arco-design/web-react';
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import './style.scss'
 
 interface IResizer {
@@ -21,9 +21,9 @@ const TriggerContent = function ({ className }: {
 export const Resizer: React.FC<IResizer> = ({ componentConfig, children }) => {
   const { updateRenderList } = useContext(context)
 
-  const boxRef = useRef()
+  // const boxRef = useRef()
   const onUpdateSize = ({ width, height } : {width: number, height: number}) => {
-    const newConfig = {...componentConfig}
+    const newConfig = {...componentConfig, setting: true}
     newConfig.style = {...newConfig.style, width: `${width}px`, height: `${height}px`}
     if (updateRenderList) {
       updateRenderList(newConfig)
@@ -33,7 +33,7 @@ export const Resizer: React.FC<IResizer> = ({ componentConfig, children }) => {
     <ResizeBox
       directions={['right', 'bottom']}
       className="resizer"
-      ref={boxRef}
+      // ref={boxRef}
       style={{
         width: componentConfig.style.width,
         height: componentConfig.style.height,
