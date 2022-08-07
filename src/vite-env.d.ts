@@ -9,6 +9,11 @@ interface ImportMeta {
   readonly env: ImportMetaEnv
 }
 
+export interface IPageInfo {
+  title: string
+  platform: PC | H5
+}
+
 export interface IAttributes {
   src?: string
   innerText?: string

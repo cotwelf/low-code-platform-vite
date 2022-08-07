@@ -1,71 +1,35 @@
 @import '../../../style/variables.scss';
 
-// .resizebox-trigger {
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   width: 100%;
-//   height: 100%;
-//   background-color: transparent;
-// }
+/* 伸缩框距组件 */
+$padding: 4px;
 
-// .resizebox-trigger::before,
-// .resizebox-trigger::after {
-//   width: 6px;
-//   height: 6px;
-//   border: 1px solid $blue-base;
-//   content: '';
-// }
-
-// .resizebox-trigger-line {
-//   flex: 1;
-//   background-color: $blue-base;
-// }
-
-// .resizebox-trigger-vertical {
-//   flex-direction: column;
-// }
-
-// .resizebox-trigger-vertical,
-// .resizebox-trigger-horizontal {
-//   position: absolute;
-
-//   .resizebox-trigger-line {
-//     width: 100%;
-//     height: 1px;
-//   }
-// }
-
-// .resizer.arco-resizebox {
-//   position: absolute;
-//   background: $blue-base-20;
-//   overflow: visible;
-// }
-$padding: 4px; // 伸缩框距组件
 .resizer.arco-resizebox {
-  overflow: visible;
-  display: inline-block;
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
+  display: inline-block;
+  overflow: visible;
+
   .resizebox-trigger {
-    background-color: $blue-base;
+    position: absolute;
+    right: 0 - $padding;
+    bottom: 0 - $padding;
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 0 - $padding;
-    right: 0 - $padding;
-    position: absolute;
+    background-color: $blue-base;
+
     &::after {
-      content: '';
       display: block;
       border: 3px solid $blue-base;
+      content: '';
     }
+
     &.vertical {
-      height: calc(100% + $padding);
       width: 2px;
+      height: calc(100% + $padding);
     }
+
     &.horizontal {
       width: calc(100% + $padding);
       height: 2px;

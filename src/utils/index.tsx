@@ -1,5 +1,3 @@
-export * from './toggle-modal'
-
 export const splitAfterNumber = (str?: string) => {
   if (!str) {
     return {
