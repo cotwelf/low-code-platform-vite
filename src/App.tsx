@@ -1,32 +1,66 @@
+import '@arco-design/web-react/dist/css/arco.css'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { ComponentName, ComponentSchema } from './types/lowCodeCompo.type'
+import { getComponentSchema } from './component/plugins/plugins'
 
-function App() {
-  const [count, setCount] = useState(0)
+import React from 'react'
+import { Canvas } from './component/canvas'
+
+import { PluginListPanel } from './component/pluginListPanel'
+import { PropsEditorPanel } from './component/editor-panel'
+
+// const TabPane = Tabs.TabPane
+
+type Dispatch<T> = React.Dispatch<React.SetStateAction<T>>
+
+export const context = React.createContext<
+  Partial<{
+    components: ComponentSchema[]
+    setComponents: Dispatch<ComponentSchema[]>
+    editingCompo: ComponentSchema | null
+    setEditingCompo: Dispatch<ComponentSchema | null>
+    reRender: boolean
+    setReRender: Dispatch<boolean>
+    clone: (conKey: ComponentName) => void
+  }>
+>({})
+
+function Editor() {
+  const [components, setComponents] = useState<ComponentSchema[]>([])
+  const [editingCompo, setEditingCompo] = useState<ComponentSchema | null>(null)
+  const [reRender, setReRender] = useState(false)
+  // 添加组件数据至数组中
+
+  const clone = (conKey: ComponentName) => {
+    const schema = getComponentSchema(conKey)
+    setComponents((components) => [...components, schema])
+  }
 
   return (
+    <context.Provider
+      value={{ components, setComponents, editingCompo, setEditingCompo, reRender, setReRender, clone }}
+    >
+      <div id="designer-page">
+        <div className="arco-col arco-col-5">
+          <PluginListPanel></PluginListPanel>
+        </div>
+        <div className="arco-col arco-col-13">
+          <div className="canvas-wrapper">
+            <Canvas></Canvas>
+          </div>
+        </div>
+        <div className="arco-col arco-col-6" style={{ border: ' 1px solid #f1efef' }}>
+          <PropsEditorPanel />
+        </div>
+      </div>
+    </context.Provider>
+  )
+}
+
+function App() {
+  return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Editor />
     </div>
   )
 }
