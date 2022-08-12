@@ -2,9 +2,11 @@ import { context } from '@//App'
 import { IDragIcon } from '@//types/pluginList.type'
 import { ComponentName } from '@//types/lowCodeCompo.type'
 import { CSSProperties, useContext } from 'react'
+import classNames from 'classnames'
 import { useDrop } from 'react-dnd'
 // import { ImageComponent } from '../plugins/ImageComponent'
 import { Shape } from '../shape'
+import './style.scss'
 
 // 画布
 export function Canvas() {
@@ -20,7 +22,7 @@ export function Canvas() {
 
   if (components && setEditingCompo && setReRender) {
     return (
-      <div ref={drop} style={{ height: '100%', border: isOver ? '5px solid lightblue' : '0px' }}>
+      <div className={classNames('canvas-wrapper', {over: isOver})} ref={drop}>
         {components.map((componentSchema, index) => {
           const schema = componentSchema
           // 根据schema的名称进行相应的渲染

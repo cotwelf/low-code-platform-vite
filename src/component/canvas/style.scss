@@ -1,0 +1,29 @@
+@import '../../style/variables.scss';
+
+$canvasWidth: 320px;
+$canvasHeigh: 568px;
+
+.canvas-wrapper {
+  position: relative;
+  top: 5%;
+  z-index: 2;
+  width: $canvasWidth;
+  height: $canvasHeigh;
+  margin: 0 auto;
+  background-color: $white;
+  box-shadow: 0 1px 6px $grey-normal;
+
+  &.over {
+    border: 5px solid lightblue;
+  }
+
+  .shape-point {
+    position: absolute;
+    z-index: 1;
+    width: 6px;
+    height: 6px;
+    background: $white;
+    border: 1px solid $blue-light;
+    border-radius: 50%;
+  }
+}
