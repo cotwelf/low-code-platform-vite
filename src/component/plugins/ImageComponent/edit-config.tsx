@@ -2,22 +2,21 @@ import { context } from '@//App'
 import { IImageEditConfig } from '@//types/editConfig.type'
 import { IPictureComponent } from '@//types/lowCodeCompo.type'
 import { Form } from '@arco-design/web-react'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { getEditComponent } from '../../edit-component/base'
 // import { EditInputProp } from './editbase.type'
 // 获取并配置image组件的编辑栏
 export const ImageConfigComponents = () => {
   const { editingCompo, reRender, setReRender } = useContext(context)
-  const imgCompo = editingCompo as IPictureComponent
-  const editorConfig = imgCompo.editConfig
-  // const imageConfig = editorConfig.imgSrc
-
-  const formItems: JSX.Element[] = []
+  const [formItems, setFormItems] = useState<Array<JSX.Element>>([])
 
   useEffect(() => {
     if (!editingCompo?.editConfig) {
       return
     }
+    const imgCompo = { ...editingCompo } as IPictureComponent
+    const editorConfig: IImageEditConfig = { ...imgCompo.editConfig }
+    let tempFormItems: JSX.Element[] = []
     // 遍历config动态生成修改部分
     let key: keyof IImageEditConfig
     for (key in editorConfig) {
@@ -34,10 +33,10 @@ export const ImageConfigComponents = () => {
       }
       configItem.callback = callback
       const formItem = getEditComponent(configItem, key)
-      formItems.push(formItem)
+      tempFormItems = [...tempFormItems, formItem]
     }
+    setFormItems(tempFormItems)
   }, [editingCompo?.editConfig])
-
 
   return <Form>{formItems}</Form>
 }
