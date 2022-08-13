@@ -1,0 +1,33 @@
+@import '../../style/variables.scss';
+
+.nav {
+  height: calc(100vh - 60px);
+
+  &.nav-right {
+    .component-info {
+      padding: 20px 5px 0;
+    }
+
+    .form {
+      width: 90%;
+      margin: 20px auto 0;
+      text-align: left;
+
+      /* label */
+      .arco-form-item > .arco-form-label-item {
+        flex: 0 0 30%;
+      }
+
+      /* input */
+      .arco-col.arco-col-19.arco-form-item-wrapper {
+        flex: 0 0 70%;
+      }
+    }
+
+    .pick-color {
+      width: 25px;
+      height: 25px;
+      margin: 2px;
+    }
+  }
+}
