@@ -11,9 +11,7 @@ export const ImageConfigComponents = () => {
   const imgCompo = editingCompo as IPictureComponent
   const editorConfig = imgCompo.editConfig
   // const imageConfig = editorConfig.imgSrc
-
   const formItems: JSX.Element[] = []
-
   // 遍历config动态生成修改部分
   let key: keyof IImageEditConfig
   for (key in editorConfig) {
@@ -24,7 +22,6 @@ export const ImageConfigComponents = () => {
       imgCompo.props[key] = val
       // 修改render使得页面数据刷新
       setReRender?.(() => {
-        console.log('页面更新成功')
         return !reRender
       })
     }

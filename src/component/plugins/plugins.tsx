@@ -2,7 +2,7 @@ import { ComponentName, ComponentSchema, IButtonComponent, IPictureComponent } f
 import { getPicComponent, pictureSchema } from './ImageComponent'
 import { getBtnComponent, buttonSchema } from './ButtonComponent'
 
-const defaultStyle = {
+export const defaultStyle = {
   position: 'absolute',
   top: '100px',
   left: '100px',
@@ -23,7 +23,7 @@ export const getComponentSchema = (name: ComponentName): ComponentSchema => {
       return pictureSchema(id, defaultStyle)
     }
     case ComponentName.ButtonComponent: {
-      return buttonSchema(id, defaultStyle)
+      return buttonSchema(id)
     }
   }
 }

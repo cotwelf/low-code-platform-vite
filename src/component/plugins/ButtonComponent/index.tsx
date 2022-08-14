@@ -1,13 +1,15 @@
 import { EditComponentKey } from '@//types/editbase.type'
-import { ComponentName, ComponentSchema, ComponentStyle, IButtonComponent } from '@//types/lowCodeCompo.type'
+import { ComponentName, ComponentSchema, IButtonComponent } from '@//types/lowCodeCompo.type'
+import { defaultStyle } from '../plugins'
 
-export const buttonSchema = (id: string, defaultStyle: ComponentStyle): ComponentSchema => {
+export const buttonSchema = (id: string): ComponentSchema => {
   return {
     id,
     name: ComponentName.ButtonComponent,
     props: {
       innerText: 'button',
-      ...defaultStyle,
+      backgroundColor: '#165dff',
+      color: '#ffffff'
     },
     event: {
       type: '',
@@ -24,15 +26,28 @@ export const buttonSchema = (id: string, defaultStyle: ComponentStyle): Componen
       backgroundColor: {
         name: EditComponentKey.EDIT_INPUT,
         propType: 'color',
-        label: '颜色',
-        value: 'pink',
+        label: '背景颜色',
+        value: '#165dff',
+        callback: null
+      },
+      color: {
+        name: EditComponentKey.EDIT_INPUT,
+        propType: 'color',
+        label: '字体颜色',
+        value: '#ffffff',
         callback: null
       }
     },
-    style: { ...defaultStyle, backgroundColor: 'pink' }
+    style: { ...defaultStyle }
   }
 }
 export function getBtnComponent(schema: ComponentSchema | undefined) {
   const { props, id } = schema as IButtonComponent
-  return <button key={id} style={{ height: '100%', width: '100%' }}>{props.innerText}</button>
+  const style = {
+    height: '100%',
+    width: '100%',
+    backgroundColor: props.backgroundColor,
+    color: props.color,
+  }
+  return <button key={id} style={style}>{props.innerText}</button>
 }

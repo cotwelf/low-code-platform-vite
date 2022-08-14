@@ -163,7 +163,6 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
       // 重新渲染
       reRender = !reRender
       setReRender(reRender)
-      console.log('页面更新成功')
     }
   }
 

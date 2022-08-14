@@ -6,6 +6,7 @@ export interface IImageEditConfig {
 export interface IButtonEditConfig {
   innerText: EditInputProp
   backgroundColor: EditInputProp
+  color: EditInputProp
 }
 
 export type ComponentEditConfig = IImageEditConfig | IButtonEditConfig

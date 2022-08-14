@@ -19,6 +19,10 @@ export interface ComponentStyle {
   fontSize: string
 }
 
+export interface IAttribute {
+  innerText?: string
+}
+
 export interface IPictureComponent {
   id: string
   name: ComponentName.PictureComponent
@@ -34,6 +38,8 @@ export interface IButtonComponent {
   name: ComponentName.ButtonComponent
   props: {
     innerText: string
+    backgroundColor: string
+    color: string
   }
   event: {
     type: 'toggleShow' | 'openUrl' | ''
@@ -41,7 +47,7 @@ export interface IButtonComponent {
   }
   // 编辑器的属性
   editConfig: IButtonEditConfig
-  style: ComponentStyle | React.CSSProperties
+  style?: ComponentStyle | React.CSSProperties
 }
 
 // 将所有组件的数据联合起来
