@@ -1,4 +1,4 @@
-import { context } from '@//App'
+import { context } from '@//views/editor'
 import { IDragIcon } from '@//types/pluginList.type'
 import { ComponentName } from '@//types/lowCodeCompo.type'
 import { CSSProperties, useContext } from 'react'
