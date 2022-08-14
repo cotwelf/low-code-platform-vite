@@ -20,7 +20,7 @@ export function Canvas() {
       isOver: !!monitor.isOver()
     })
   }))
-
+  console.log(components, 'components')
   if (components && setEditingCompo && setReRender) {
     return (
       <div className={classNames('canvas-wrapper', { over: isOver })} ref={drop}>

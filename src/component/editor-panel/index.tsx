@@ -4,6 +4,7 @@ import { Layout } from '@arco-design/web-react';
 // import { Form } from '@arco-design/web-react'
 import { useContext } from 'react'
 import { ImageConfigComponents } from '../plugins/ImageComponent/edit-config'
+import { ButtonConfigComponents } from '../plugins/ButtonComponent/edit-config';
 import './style.scss'
 const Sider = Layout.Sider;
 // 编辑栏
@@ -13,7 +14,6 @@ export function PropsEditorPanel() {
   if (!editingCompo || !setReRender) {
     return null
   }
-
   return (
     <Sider
       collapsed={false}
@@ -24,6 +24,9 @@ export function PropsEditorPanel() {
     >
       {editingCompo.name === ComponentName.PictureComponent && (
         <ImageConfigComponents />
+      )}
+      {editingCompo.name === ComponentName.ButtonComponent && (
+        <ButtonConfigComponents />
       )}
     </Sider>
   )

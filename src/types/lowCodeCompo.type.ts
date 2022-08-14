@@ -33,11 +33,15 @@ export interface IButtonComponent {
   id: string
   name: ComponentName.ButtonComponent
   props: {
-    text: string
+    innerText: string
+  }
+  event: {
+    type: 'toggleShow' | 'openUrl' | ''
+    componentId: number[] | []
   }
   // 编辑器的属性
   editConfig: IButtonEditConfig
-  style: ComponentStyle
+  style: ComponentStyle | React.CSSProperties
 }
 
 // 将所有组件的数据联合起来

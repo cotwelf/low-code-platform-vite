@@ -7,5 +7,11 @@ const ImageComponentIcon: IPluginListIcon = {
   compKey: ComponentName.PictureComponent
 }
 
+const ButtonComponentIcon: IPluginListIcon = {
+  icon: <i style={{ display: 'block' }} className={'fa fa-hand-pointer-o'} />,
+  text: '按钮',
+  compKey: ComponentName.ButtonComponent
+}
+
 // 左侧组件列表
-export const PLUGIN_LIST: IPluginListIcon[] = [ImageComponentIcon]
+export const PLUGIN_LIST: IPluginListIcon[] = [ImageComponentIcon, ButtonComponentIcon]

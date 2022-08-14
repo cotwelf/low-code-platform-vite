@@ -4,7 +4,8 @@ export interface IImageEditConfig {
   imgSrc: EditInputProp
 }
 export interface IButtonEditConfig {
-  text: EditInputProp
+  innerText: EditInputProp
+  backgroundColor: EditInputProp
 }
 
 export type ComponentEditConfig = IImageEditConfig | IButtonEditConfig
