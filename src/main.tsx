@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
@@ -7,7 +7,9 @@ import './style/index.scss'
 import { Preview } from './views/preview'
 import { Editor } from './views/editor'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+const container = document.getElementById('root')
+const root = createRoot(container as HTMLElement)
+root.render(
   <DndProvider backend={HTML5Backend}>
     <BrowserRouter>
       <Routes>

@@ -29,6 +29,21 @@ export interface IPictureComponent {
   props: {
     imgSrc: string
   }
+  events: {
+    type: string[]
+    clickEvents: {
+      onClick: {
+        callback: React.MouseEventHandler<HTMLButtonElement> | undefined
+        actionType: string
+        val: string
+      }
+      dbClick: {
+        callback: React.MouseEventHandler<HTMLButtonElement> | undefined
+        actionType: string
+        val: string
+      }
+    }
+  }
   // 编辑器的属性
   editConfig: IImageEditConfig
   style: ComponentStyle
@@ -41,13 +56,25 @@ export interface IButtonComponent {
     backgroundColor: string
     color: string
   }
-  event: {
-    type: 'toggleShow' | 'openUrl' | ''
-    componentId: number[] | []
+
+  events: {
+    type: string[]
+    clickEvents: {
+      onClick: {
+        callback: React.MouseEventHandler<HTMLButtonElement> | undefined
+        actionType: string
+        val: ''
+      }
+      dbClick: {
+        callback: React.MouseEventHandler<HTMLButtonElement> | undefined
+        actionType: string
+        val: ''
+      }
+    }
   }
   // 编辑器的属性
   editConfig: IButtonEditConfig
-  style?: ComponentStyle | React.CSSProperties
+  style: ComponentStyle
 }
 
 // 将所有组件的数据联合起来

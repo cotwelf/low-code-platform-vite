@@ -8,6 +8,21 @@ export const pictureSchema = (id: string, defaultStyle: ComponentStyle): Compone
     props: {
       imgSrc: '/default-pic.jpg'
     },
+    events: {
+      type: ['alert', 'openUrl', 'null'],
+      clickEvents: {
+        onClick: {
+          callback: undefined,
+          actionType: 'null',
+          val: ''
+        },
+        dbClick: {
+          callback: undefined,
+          actionType: 'null',
+          val: ''
+        }
+      }
+    },
     editConfig: {
       imgSrc: {
         name: EditComponentKey.EDIT_INPUT,

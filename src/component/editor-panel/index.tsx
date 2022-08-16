@@ -1,12 +1,14 @@
 import { context } from '@//views/editor'
 import { ComponentName } from '@//types/lowCodeCompo.type'
-import { Layout } from '@arco-design/web-react';
+import { Layout, Tabs, Typography } from '@arco-design/web-react'
 // import { Form } from '@arco-design/web-react'
 import { useContext } from 'react'
 import { ImageConfigComponents } from '../plugins/ImageComponent/edit-config'
-import { ButtonConfigComponents } from '../plugins/ButtonComponent/edit-config';
+import { ButtonConfigComponents } from '../plugins/ButtonComponent/edit-config'
 import './style.scss'
-const Sider = Layout.Sider;
+import TabPane from '@arco-design/web-react/es/Tabs/tab-pane'
+import { EditEvent } from './edit-events'
+const Sider = Layout.Sider
 // 编辑栏
 export function PropsEditorPanel() {
   const { editingCompo, setReRender } = useContext(context)
@@ -15,19 +17,20 @@ export function PropsEditorPanel() {
     return null
   }
   return (
-    <Sider
-      collapsed={false}
-      collapsible
-      trigger={null}
-      width={320}
-      className={'nav nav-right'}
-    >
-      {editingCompo.name === ComponentName.PictureComponent && (
-        <ImageConfigComponents />
-      )}
-      {editingCompo.name === ComponentName.ButtonComponent && (
-        <ButtonConfigComponents />
-      )}
+    <Sider collapsed={false} collapsible trigger={null} width={420} className={'nav nav-right'}>
+      <Tabs defaultActiveTab="props">
+        <TabPane key="props" title="属性">
+          <Typography.Paragraph>
+            {editingCompo.name === ComponentName.PictureComponent && <ImageConfigComponents />}
+            {editingCompo.name === ComponentName.ButtonComponent && <ButtonConfigComponents />}
+          </Typography.Paragraph>
+        </TabPane>
+        <TabPane key="events" title="事件">
+          <Typography.Paragraph>
+            <EditEvent></EditEvent>
+          </Typography.Paragraph>
+        </TabPane>
+      </Tabs>
     </Sider>
   )
 }

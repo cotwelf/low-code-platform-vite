@@ -1,6 +1,6 @@
 import { ComponentName, ComponentSchema, IButtonComponent, IPictureComponent } from '../../types/lowCodeCompo.type'
 import { getPicComponent, pictureSchema } from './ImageComponent'
-import { getBtnComponent, buttonSchema } from './ButtonComponent'
+import { BtnComponent, buttonSchema } from './ButtonComponent'
 
 export const defaultStyle = {
   position: 'absolute',
@@ -38,7 +38,7 @@ export const getComponent = (schema: ComponentSchema | undefined): JSX.Element =
     }
     case ComponentName.ButtonComponent: {
       const btnSchema = schema as IButtonComponent
-      return getBtnComponent(btnSchema)
+      return <BtnComponent schema={btnSchema}></BtnComponent>
     }
     default:
       return <></>

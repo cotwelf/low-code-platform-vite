@@ -20,13 +20,11 @@ interface IResponseData {
 export async function createPage(navigate: NavigateFunction) {
   const res = await strapi.create('pages', { components: [] })
   const data = res.data as IResponseData
-  console.log('createPage', data)
   navigate(`/editor/${data.id}`)
 }
 
 // 更新页面
 export async function updatePage(id: number, components: ComponentSchema[] = []) {
-  console.log('components', components)
   await strapi.update('pages', id, { components }).then(
     () => {
       Message.success('保存成功')
