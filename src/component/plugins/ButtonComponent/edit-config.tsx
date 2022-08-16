@@ -15,22 +15,20 @@ export const ButtonConfigComponents = () => {
     const editorConfig = btnCompo.editConfig
     const tempFormItem: JSX.Element[] = []
     // 遍历 config 动态生成修改部分
-    let key: keyof IButtonEditConfig
-    for (key in editorConfig) {
-      const configItem = editorConfig[key]
-      configItem.value = btnCompo.props[key]
-      // 配置回调函数
-      const callback = (val: string) => {
-        btnCompo.props[key] = val
+    Object.keys(editorConfig).forEach((key) => {
+      const curKey = key as keyof IButtonEditConfig
+      const configItem = editorConfig[curKey]
+      configItem.value = btnCompo.props[curKey]
+      configItem.callback = (val: string) => {
+        btnCompo.props[curKey] = val
         // 修改render使得页面数据刷新
         setReRender?.(() => {
           return !reRender
         })
       }
-      configItem.callback = callback
       const formItem = getEditComponent(configItem, key)
-      formItems.push(formItem)
-    }
+      tempFormItem.push(formItem)
+    })
     setFormItems(tempFormItem)
   }, [JSON.stringify(editingCompo?.editConfig)])
 
