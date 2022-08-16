@@ -75,9 +75,10 @@ export const BtnComponent: React.FC<BtnProps> = ({ schema }) => {
   useEffect(() => {
     if (events?.clickEvents && setReRender) {
       // 动态设置事件
-      const onClickProps = events.clickEvents.onClick
+      const clickEvents = events.clickEvents
       const setCallback = (eventType: keyof typeof events.clickEvents, actionType: string, val: string) => {
         events.clickEvents[eventType]
+
         switch (actionType) {
           case 'alert':
             events.clickEvents[eventType].callback = () => {
@@ -96,10 +97,14 @@ export const BtnComponent: React.FC<BtnProps> = ({ schema }) => {
             break
         }
       }
-      setCallback('onClick', onClickProps.actionType, onClickProps.val)
+      Object.keys(clickEvents).forEach((key) => {
+        const eventType = key as keyof typeof clickEvents
+        setCallback(eventType, clickEvents[eventType].actionType, clickEvents[eventType].val)
+      })
+
       setReRender(!reRender)
     }
-  }, [events?.clickEvents.onClick.val, events?.clickEvents.dbClick.val, events])
+  }, [events])
   const clickEvents = schema?.events.clickEvents
   const onClickCb = clickEvents?.onClick.callback
   const dbClickCb = clickEvents?.dbClick.callback
