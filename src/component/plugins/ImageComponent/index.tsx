@@ -1,5 +1,14 @@
 import { EditComponentKey } from '@//types/editbase.type'
-import { ComponentName, ComponentSchema, ComponentStyle, IPictureComponent } from '@//types/lowCodeCompo.type'
+import {
+  ComponentName,
+  ComponentSchema,
+  ComponentStyle,
+  IPictureComponent,
+  PluginComponentProps
+} from '@//types/lowCodeCompo.type'
+import { initEvents } from '@//utils/util'
+import { context } from '@//views/preview'
+import { useContext, useEffect } from 'react'
 
 export const pictureSchema = (id: string, defaultStyle: ComponentStyle): ComponentSchema => {
   return {
@@ -35,7 +44,21 @@ export const pictureSchema = (id: string, defaultStyle: ComponentStyle): Compone
     style: { ...defaultStyle }
   }
 }
-export function getPicComponent(schema: ComponentSchema | undefined) {
+export const PicComponent: React.FC<PluginComponentProps> = ({ schema }) => {
   const { props, id } = schema as IPictureComponent
-  return <img key={id} style={{ height: '100%', width: '100%' }} src={props.imgSrc} />
+  const { reRender, setReRender } = useContext(context)
+  const events = schema?.events
+  useEffect(() => initEvents(events, setReRender, reRender), [events])
+  const clickEvents = schema?.events.clickEvents
+  const onClickCb = clickEvents?.onClick.callback
+  const dbClickCb = clickEvents?.dbClick.callback
+  return (
+    <img
+      key={id}
+      onClick={onClickCb}
+      onDoubleClick={dbClickCb}
+      style={{ height: '100%', width: '100%' }}
+      src={props.imgSrc}
+    />
+  )
 }

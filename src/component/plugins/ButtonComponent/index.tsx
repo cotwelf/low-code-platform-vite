@@ -1,7 +1,7 @@
 import { EditComponentKey } from '@//types/editbase.type'
-import { ComponentName, ComponentSchema, IButtonComponent } from '@//types/lowCodeCompo.type'
+import { ComponentName, ComponentSchema, IButtonComponent, PluginComponentProps } from '@//types/lowCodeCompo.type'
+import { initEvents } from '@//utils/util'
 import { context } from '@//views/preview'
-import { Message } from '@arco-design/web-react'
 import React from 'react'
 import { useContext, useEffect } from 'react'
 import { defaultStyle } from '../plugins'
@@ -56,11 +56,8 @@ export const buttonSchema = (id: string): ComponentSchema => {
     style: { ...defaultStyle }
   }
 }
-// 因为函数组件传递属性只能使用props,所以用BtnProps来接收schema,如果不是FC组件，使用useEffect会报错
-interface BtnProps {
-  schema: ComponentSchema | undefined
-}
-export const BtnComponent: React.FC<BtnProps> = ({ schema }) => {
+
+export const BtnComponent: React.FC<PluginComponentProps> = ({ schema }) => {
   const { props, id } = schema as IButtonComponent
   const style = {
     height: '100%',
@@ -72,39 +69,7 @@ export const BtnComponent: React.FC<BtnProps> = ({ schema }) => {
   const { reRender, setReRender } = useContext(context)
   const events = schema?.events
   // 初始化加载自定义事件
-  useEffect(() => {
-    if (events?.clickEvents && setReRender) {
-      // 动态设置事件
-      const clickEvents = events.clickEvents
-      const setCallback = (eventType: keyof typeof events.clickEvents, actionType: string, val: string) => {
-        events.clickEvents[eventType]
-
-        switch (actionType) {
-          case 'alert':
-            events.clickEvents[eventType].callback = () => {
-              Message.warning(val)
-            }
-            break
-          case 'openUrl':
-            events.clickEvents[eventType].callback = () => {
-              window.open(val, '_blank', 'noopener,noreferrer')
-            }
-            events.clickEvents[eventType].val = val
-            break
-          case 'null':
-            events.clickEvents[eventType].callback = undefined
-            events.clickEvents[eventType].val = ''
-            break
-        }
-      }
-      Object.keys(clickEvents).forEach((key) => {
-        const eventType = key as keyof typeof clickEvents
-        setCallback(eventType, clickEvents[eventType].actionType, clickEvents[eventType].val)
-      })
-
-      setReRender(!reRender)
-    }
-  }, [events])
+  useEffect(() => initEvents(events, setReRender, reRender), [events])
   const clickEvents = schema?.events.clickEvents
   const onClickCb = clickEvents?.onClick.callback
   const dbClickCb = clickEvents?.dbClick.callback

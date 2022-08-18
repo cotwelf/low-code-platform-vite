@@ -3,7 +3,8 @@ import { IButtonEditConfig, IImageEditConfig } from './editConfig.type'
 
 export enum ComponentName {
   PictureComponent = 'PictureComponent',
-  ButtonComponent = 'ButtonComponent'
+  ButtonComponent = 'ButtonComponent',
+  VideoComponent = 'VideoComponent'
 }
 
 export interface ComponentStyle {
@@ -33,12 +34,12 @@ export interface IPictureComponent {
     type: string[]
     clickEvents: {
       onClick: {
-        callback: React.MouseEventHandler<HTMLButtonElement> | undefined
+        callback: React.MouseEventHandler<HTMLElement> | undefined
         actionType: string
         val: string
       }
       dbClick: {
-        callback: React.MouseEventHandler<HTMLButtonElement> | undefined
+        callback: React.MouseEventHandler<HTMLElement> | undefined
         actionType: string
         val: string
       }
@@ -61,12 +62,41 @@ export interface IButtonComponent {
     type: string[]
     clickEvents: {
       onClick: {
-        callback: React.MouseEventHandler<HTMLButtonElement> | undefined
+        callback: React.MouseEventHandler<HTMLElement> | undefined
         actionType: string
         val: ''
       }
       dbClick: {
-        callback: React.MouseEventHandler<HTMLButtonElement> | undefined
+        callback: React.MouseEventHandler<HTMLElement> | undefined
+        actionType: string
+        val: ''
+      }
+    }
+  }
+  // 编辑器的属性
+  editConfig: IButtonEditConfig
+  style: ComponentStyle
+}
+
+export interface IVideoComponent {
+  id: string
+  name: ComponentName.ButtonComponent
+  props: {
+    url: string
+    poster: string
+    controlBar: boolean
+  }
+
+  events: {
+    type: string[]
+    clickEvents: {
+      onClick: {
+        callback: React.MouseEventHandler<HTMLElement> | undefined
+        actionType: string
+        val: ''
+      }
+      dbClick: {
+        callback: React.MouseEventHandler<HTMLElement> | undefined
         actionType: string
         val: ''
       }
@@ -79,3 +109,8 @@ export interface IButtonComponent {
 
 // 将所有组件的数据联合起来
 export type ComponentSchema = IPictureComponent | IButtonComponent
+
+// 因为函数组件传递属性只能使用props,所以用BtnProps来接收schema,如果不是FC组件，使用useEffect会报错
+export interface PluginComponentProps {
+  schema: ComponentSchema | undefined
+}
