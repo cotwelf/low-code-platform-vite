@@ -1,5 +1,5 @@
 // import { DraggableItemKey } from '../constants/plugin-icon-list'
-import { IButtonEditConfig, IImageEditConfig } from './editConfig.type'
+import { IButtonEditConfig, IImageEditConfig, IVideoEditConfig } from './editConfig.type'
 
 export enum ComponentName {
   PictureComponent = 'PictureComponent',
@@ -80,11 +80,11 @@ export interface IButtonComponent {
 
 export interface IVideoComponent {
   id: string
-  name: ComponentName.ButtonComponent
+  name: ComponentName.VideoComponent
   props: {
     url: string
     poster: string
-    controlBar: boolean
+    // controlBar: boolean
   }
 
   events: {
@@ -103,12 +103,12 @@ export interface IVideoComponent {
     }
   }
   // 编辑器的属性
-  editConfig: IButtonEditConfig
+  editConfig: IVideoEditConfig
   style: ComponentStyle
 }
 
 // 将所有组件的数据联合起来
-export type ComponentSchema = IPictureComponent | IButtonComponent
+export type ComponentSchema = IPictureComponent | IButtonComponent | IVideoComponent
 
 // 因为函数组件传递属性只能使用props,所以用BtnProps来接收schema,如果不是FC组件，使用useEffect会报错
 export interface PluginComponentProps {

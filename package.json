@@ -35,10 +35,11 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-json-view": "^1.21.3",
-    "react-player": "^2.10.1",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
-    "strapi-sdk-js": "^2.2.0"
+    "strapi-sdk-js": "^2.2.0",
+    "@types/video.js": "7.3.3",
+    "video.js": "7.6.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",

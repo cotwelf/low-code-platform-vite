@@ -8,6 +8,7 @@ import { ButtonConfigComponents } from '../plugins/ButtonComponent/edit-config'
 import './style.scss'
 import TabPane from '@arco-design/web-react/es/Tabs/tab-pane'
 import { EditEvent } from './edit-events'
+import { VideoConfigComponents } from '../plugins/VideoComponent/edit-config'
 const Sider = Layout.Sider
 // 编辑栏
 export function PropsEditorPanel() {
@@ -23,6 +24,7 @@ export function PropsEditorPanel() {
           <Typography.Paragraph>
             {editingCompo.name === ComponentName.PictureComponent && <ImageConfigComponents />}
             {editingCompo.name === ComponentName.ButtonComponent && <ButtonConfigComponents />}
+            {editingCompo.name === ComponentName.VideoComponent && <VideoConfigComponents />}
           </Typography.Paragraph>
         </TabPane>
         <TabPane key="events" title="事件">

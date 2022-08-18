@@ -16,7 +16,7 @@ const ButtonComponentIcon: IPluginListIcon = {
 const VideoComponentIcon: IPluginListIcon = {
   icon: <i style={{ display: 'block' }} className={'fa fa-video-camera'} />,
   text: '视频',
-  compKey: ComponentName.ButtonComponent
+  compKey: ComponentName.VideoComponent
 }
 
 // 左侧组件列表

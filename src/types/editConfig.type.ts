@@ -9,4 +9,10 @@ export interface IButtonEditConfig {
   color: EditInputProp
 }
 
-export type ComponentEditConfig = IImageEditConfig | IButtonEditConfig
+export interface IVideoEditConfig {
+  url: EditInputProp
+  poster: EditInputProp
+  // controlBar: EditInputProp
+}
+
+export type ComponentEditConfig = IImageEditConfig | IButtonEditConfig | IVideoEditConfig

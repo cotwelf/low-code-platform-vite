@@ -1,0 +1,109 @@
+import { EditComponentKey } from '@//types/editbase.type'
+import { ComponentName, ComponentSchema, IVideoComponent, PluginComponentProps } from '@//types/lowCodeCompo.type'
+import { defaultStyle } from '../plugins'
+import { initialOptions } from '@//types/video.js.type'
+import videojs, { VideoJsPlayer } from 'video.js'
+// Styles
+import 'video.js/dist/video-js.css'
+import { useEffect, useRef, useState } from 'react'
+
+export const videoSchema = (id: string): ComponentSchema => {
+  return {
+    id,
+    name: ComponentName.VideoComponent,
+    props: {
+      url: '/assets/video1.mp4',
+      poster: '//vjs.zencdn.net/v/oceans.png'
+      //   controlBar: true
+    },
+    events: {
+      type: ['alert', 'openUrl', 'null'],
+      clickEvents: {
+        onClick: {
+          callback: undefined,
+          actionType: 'null',
+          val: ''
+        },
+        dbClick: {
+          callback: undefined,
+          actionType: 'null',
+          val: ''
+        }
+      }
+    },
+    editConfig: {
+      url: {
+        name: EditComponentKey.EDIT_INPUT,
+        propType: 'textarea',
+        label: '视频地址',
+        value: '/assets/video1.mp4',
+        callback: null
+      },
+      poster: {
+        name: EditComponentKey.EDIT_INPUT,
+        propType: 'textarea',
+        label: '封面url',
+        value: '//vjs.zencdn.net/v/oceans.png',
+        callback: null
+      }
+      //   controlBar: {
+      //     name: EditComponentKey.EDIT_INPUT,
+      //     propType: 'color',
+      //     label: '字体颜色',
+      //     value: '#ffffff',
+      //     callback: null
+      //   }
+    },
+    style: { ...defaultStyle, height: '140px', width: '250px', top: '88px', left: '51px' }
+  }
+}
+
+export const VideoCompo: React.FC<PluginComponentProps> = ({ schema }) => {
+  const videoNode = useRef<HTMLVideoElement>(null)
+  const player = useRef<videojs.Player>()
+  const [videoPlayer, setVideoPlayer] = useState<VideoJsPlayer | null>()
+  const compoSchema = schema as IVideoComponent
+  const props = compoSchema.props
+  const options: videojs.PlayerOptions = {
+    ...initialOptions,
+    sources: [
+      {
+        src: '/assets/video1.mp4',
+        type: 'video/mp4'
+      }
+    ]
+  }
+
+  useEffect(() => {
+    // 修改路径
+    if (videoPlayer) {
+      videoPlayer.src(props.url)
+      videoPlayer.poster(props.poster)
+    }
+    // 初始化video
+    else {
+      player.current = videojs(videoNode.current, {
+        ...options
+      }).ready(function (this) {
+        setVideoPlayer(this)
+        console.log('succeed')
+      })
+      return () => {
+        if (player.current) {
+          player.current.dispose()
+        }
+      }
+    }
+  }, [options])
+
+  return (
+    <div style={{ height: '100%', width: '100%' }}>
+      <video
+        style={{ height: '100%', width: '100%' }}
+        poster={props.poster}
+        ref={videoNode}
+        className="video-js vjs-big-play-centered"
+      />
+    </div>
+  )
+}

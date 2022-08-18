@@ -1,6 +1,13 @@
-import { ComponentName, ComponentSchema, IButtonComponent, IPictureComponent } from '../../types/lowCodeCompo.type'
+import {
+  ComponentName,
+  ComponentSchema,
+  IButtonComponent,
+  IPictureComponent,
+  IVideoComponent
+} from '../../types/lowCodeCompo.type'
 import { PicComponent, pictureSchema } from './ImageComponent'
 import { BtnComponent, buttonSchema } from './ButtonComponent'
+import { VideoCompo, videoSchema } from './VideoComponent'
 
 export const defaultStyle = {
   position: 'absolute',
@@ -25,8 +32,11 @@ export const getComponentSchema = (name: ComponentName): ComponentSchema => {
     case ComponentName.ButtonComponent: {
       return buttonSchema(id)
     }
+    case ComponentName.VideoComponent: {
+      return videoSchema(id)
+    }
     default: {
-      return pictureSchema(id, defaultStyle)
+      return buttonSchema(id)
     }
   }
 }
@@ -42,6 +52,10 @@ export const getComponent = (schema: ComponentSchema | undefined): JSX.Element =
     case ComponentName.ButtonComponent: {
       const btnSchema = schema as IButtonComponent
       return <BtnComponent schema={btnSchema}></BtnComponent>
+    }
+    case ComponentName.VideoComponent: {
+      const videoSchema = schema as IVideoComponent
+      return <VideoCompo schema={videoSchema}></VideoCompo>
     }
     default:
       return <></>
