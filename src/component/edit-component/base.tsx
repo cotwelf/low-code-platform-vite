@@ -12,6 +12,7 @@ import { EditComponentKey, EditComponentProps } from '@//types/editbase.type'
 import { Form } from '@arco-design/web-react'
 import { AImageInput } from './edit-imgInput'
 import { AInput } from './edit-input'
+import { AVideoInput } from './edit-videoInput'
 const FormItem = Form.Item
 
 export const getEditComponent = (editConfig: EditComponentProps, keyVal: string): JSX.Element => {
@@ -27,6 +28,13 @@ export const getEditComponent = (editConfig: EditComponentProps, keyVal: string)
       return (
         <FormItem key={keyVal} label={editConfig.label}>
           {<AImageInput editConfig={editConfig} />}
+        </FormItem>
+      )
+    }
+    case EditComponentKey.EDIT_VIDEO_INPUT: {
+      return (
+        <FormItem key={keyVal} label={editConfig.label}>
+          {<AVideoInput editConfig={editConfig} />}
         </FormItem>
       )
     }

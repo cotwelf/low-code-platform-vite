@@ -15,8 +15,9 @@ interface IFormats {
   small: IPicFormat
 }
 
-export interface IResponseImages {
+export interface IResponseMedias {
   formats: IFormats
   name: string
   mime: string
+  url: string
 }

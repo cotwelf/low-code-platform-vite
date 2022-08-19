@@ -1,7 +1,7 @@
-import { EditImageInputProp, EditInputProp } from './editbase.type'
+import { EditMediaInputProp, EditInputProp } from './editbase.type'
 // 组件编辑器属性格式
 export interface IImageEditConfig {
-  imgSrc: EditImageInputProp
+  imgSrc: EditMediaInputProp
 }
 export interface IButtonEditConfig {
   innerText: EditInputProp
@@ -10,8 +10,8 @@ export interface IButtonEditConfig {
 }
 
 export interface IVideoEditConfig {
-  url: EditInputProp
-  poster: EditInputProp
+  url: EditMediaInputProp
+  poster: EditMediaInputProp
   // controlBar: EditInputProp
 }
 

@@ -20,7 +20,6 @@ export const VideoConfigComponents = () => {
     Object.keys(editorConfig).forEach((key) => {
       const curKey = key as keyof IVideoEditConfig
       const configItem = editorConfig[curKey]
-      configItem.value = videoCompo.props[curKey]
       configItem.callback = (val: string) => {
         videoCompo.props[curKey] = val
 

@@ -2,7 +2,8 @@
 export enum EditComponentKey {
   EDIT_INPUT = 'a-input',
   EDIT_BUTTON = 'a-button',
-  EDIT_IMAGE_INPUT = 'a-image-input'
+  EDIT_IMAGE_INPUT = 'a-image-input',
+  EDIT_VIDEO_INPUT = 'a-video-input'
 }
 
 export interface EditInputProp {
@@ -13,13 +14,13 @@ export interface EditInputProp {
   callback: null | ((val: string) => void)
 }
 
-export interface EditImageInputProp {
-  name: EditComponentKey.EDIT_IMAGE_INPUT
+export interface EditMediaInputProp {
+  name: EditComponentKey.EDIT_IMAGE_INPUT | EditComponentKey.EDIT_VIDEO_INPUT
   label: string
   callback: null | ((val: string) => void)
 }
 
-export type EditComponentProps = EditInputProp | EditImageInputProp
+export type EditComponentProps = EditInputProp | EditMediaInputProp
 
 export type EditConfig = {
   editConfig: EditComponentProps

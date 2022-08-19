@@ -43,7 +43,6 @@ export async function deletePage(id: number) {
 
 // 查询单页面
 export async function findPage(id: number) {
-  console.log('查询单页面', id)
   const res = await strapi.findOne('pages', id)
   const data = res.data as IResponseData
   return data.attributes.components
@@ -51,7 +50,6 @@ export async function findPage(id: number) {
 
 // 查询所有页面
 export async function findAllPage() {
-  console.log('查询所有页面')
   const res = await strapi.find('pages')
   console.log(res.data)
 }

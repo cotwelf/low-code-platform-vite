@@ -29,8 +29,7 @@ export function Preview() {
         .then((components) => {
           setComponents(components)
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
           Message.error('页面获取失败')
         })
     }

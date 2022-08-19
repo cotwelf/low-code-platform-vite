@@ -1,6 +1,6 @@
 import { API_URL } from '@//constants/env'
 import { EditConfig } from '@//types'
-import { IResponseImages } from '@//types/strapiData.type'
+import { IResponseMedias } from '@//types/strapiData.type'
 import { Button, Message, Modal } from '@arco-design/web-react'
 import axios from 'axios'
 import { ChangeEvent, useEffect, useState } from 'react'
@@ -8,10 +8,9 @@ import { ChangeEvent, useEffect, useState } from 'react'
 // 采用对话框编辑属性
 export const AImageInput: React.FC<EditConfig> = ({ editConfig }) => {
   const [visible, setVisible] = useState(false)
-  console.warn('防止报错', editConfig)
   const [image, setImages] = useState<File | null>()
-  const [picUrls, setPicUrls] = useState<IResponseImages[] | null>([])
-  const [selectedPic, setSelectedPic] = useState<IResponseImages | undefined>()
+  const [picUrls, setPicUrls] = useState<IResponseMedias[] | null>([])
+  const [selectedPic, setSelectedPic] = useState<IResponseMedias | undefined>()
 
   function uploadImage() {
     if (image) {
@@ -26,6 +25,8 @@ export const AImageInput: React.FC<EditConfig> = ({ editConfig }) => {
           Message.error('上传失败')
         }
       )
+    } else {
+      Message.warning('请先选择一个图片')
     }
   }
 
@@ -41,7 +42,7 @@ export const AImageInput: React.FC<EditConfig> = ({ editConfig }) => {
     axios.get('http://localhost:1337/api/upload/files').then(
       (res) => {
         if (res.data) {
-          const images = (res.data as IResponseImages[]).filter((item) => /^image\/*/.test(item.mime))
+          const images = (res.data as IResponseMedias[]).filter((item) => /^image\/*/.test(item.mime))
           setPicUrls(images)
         }
       },
@@ -51,16 +52,13 @@ export const AImageInput: React.FC<EditConfig> = ({ editConfig }) => {
     )
   }
 
-  //   更新图片库
+  //   更新图片
   function updateImage() {
-    console.log(selectedPic)
-
     if (selectedPic?.name === undefined) {
       Message.warning('请先选择一个图片')
       return
     } else if (editConfig.callback) {
       editConfig.callback(API_URL + selectedPic?.formats.small.url)
-      console.log(editConfig)
 
       Message.success('修改成功')
       setVisible(false)
@@ -69,7 +67,6 @@ export const AImageInput: React.FC<EditConfig> = ({ editConfig }) => {
 
   useEffect(() => {
     getImages()
-    console.log(picUrls)
   }, [visible])
 
   return (

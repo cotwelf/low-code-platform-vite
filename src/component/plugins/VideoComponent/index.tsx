@@ -33,17 +33,13 @@ export const videoSchema = (id: string): ComponentSchema => {
     },
     editConfig: {
       url: {
-        name: EditComponentKey.EDIT_INPUT,
-        propType: 'textarea',
+        name: EditComponentKey.EDIT_VIDEO_INPUT,
         label: '视频地址',
-        value: '/assets/video1.mp4',
         callback: null
       },
       poster: {
-        name: EditComponentKey.EDIT_INPUT,
-        propType: 'textarea',
+        name: EditComponentKey.EDIT_IMAGE_INPUT,
         label: '封面url',
-        value: '//vjs.zencdn.net/v/oceans.png',
         callback: null
       }
       //   controlBar: {
@@ -86,7 +82,6 @@ export const VideoCompo: React.FC<PluginComponentProps> = ({ schema }) => {
         ...options
       }).ready(function (this) {
         setVideoPlayer(this)
-        console.log('succeed')
       })
       return () => {
         if (player.current) {
