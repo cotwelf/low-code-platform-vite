@@ -8,6 +8,7 @@ export enum EditComponentKey {
 
 export interface EditInputProp {
   name: EditComponentKey.EDIT_INPUT
+  type?: 'attribute' | 'style'
   propType: string
   label: string
   value: string

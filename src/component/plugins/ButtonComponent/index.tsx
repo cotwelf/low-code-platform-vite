@@ -13,7 +13,7 @@ export const buttonSchema = (id: string): ComponentSchema => {
     props: {
       innerText: 'button',
       backgroundColor: '#165dff',
-      color: '#ffffff'
+      color: '#ffffff',
     },
     events: {
       type: ['alert', 'openUrl', 'null'],
@@ -33,6 +33,7 @@ export const buttonSchema = (id: string): ComponentSchema => {
     editConfig: {
       innerText: {
         name: EditComponentKey.EDIT_INPUT,
+        type: 'attribute',
         propType: 'textarea',
         label: '按钮文字',
         value: 'button',
@@ -40,6 +41,7 @@ export const buttonSchema = (id: string): ComponentSchema => {
       },
       backgroundColor: {
         name: EditComponentKey.EDIT_INPUT,
+        type: 'style',
         propType: 'color',
         label: '背景颜色',
         value: '#165dff',
@@ -47,11 +49,37 @@ export const buttonSchema = (id: string): ComponentSchema => {
       },
       color: {
         name: EditComponentKey.EDIT_INPUT,
+        type: 'style',
         propType: 'color',
         label: '字体颜色',
         value: '#ffffff',
         callback: null
-      }
+      },
+      // width: {
+      //   name: EditComponentKey.EDIT_INPUT,
+      //   type: 'style',
+      //   propType: 'textarea',
+      //   label: '宽度',
+      //   value: this.style.width || 100,
+      //   callback: null
+      // },
+      // height: {
+      //   name: EditComponentKey.EDIT_INPUT,
+      //   type: 'style',
+      //   propType: 'textarea',
+      //   label: '高度',
+      //   value: this.style.height || 100,
+      //   callback: null
+      // },
+      // marginTop: {
+      //   name: EditComponentKey.EDIT_INPUT,
+      //   type: 'style',
+      //   propType: 'textarea',
+      //   label: '宽度',
+      //   value: this.style.height || 100,
+      //   callback: null
+      // },
+
     },
     style: { ...defaultStyle }
   }
