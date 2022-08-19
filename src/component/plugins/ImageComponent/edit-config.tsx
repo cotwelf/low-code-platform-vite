@@ -20,7 +20,6 @@ export const ImageConfigComponents = () => {
     Object.keys(editorConfig).forEach((key) => {
       const curKey = key as keyof IImageEditConfig
       const configItem = editorConfig[curKey]
-      configItem.value = imgCompo.props[curKey]
       configItem.callback = (val: string) => {
         imgCompo.props[curKey] = val
         // 修改render使得页面数据刷新

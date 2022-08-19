@@ -8,26 +8,11 @@
  *        callback:修改值后的回调函数
  */
 
-import { EditComponentKey, EditComponentProps, EditConfig } from '@//types/editbase.type'
-import { Input } from '@arco-design/web-react'
+import { EditComponentKey, EditComponentProps } from '@//types/editbase.type'
 import { Form } from '@arco-design/web-react'
-import React from 'react'
+import { AImageInput } from './edit-imgInput'
+import { AInput } from './edit-input'
 const FormItem = Form.Item
-
-const AInput: React.FC<EditConfig> = ({ editConfig }) => {
-  return (
-    <Input
-      type={editConfig.propType}
-      value={editConfig.value}
-      onChange={(val) => {
-        if (editConfig.callback) {
-          editConfig.value = val
-          editConfig.callback(val)
-        }
-      }}
-    ></Input>
-  )
-}
 
 export const getEditComponent = (editConfig: EditComponentProps, keyVal: string): JSX.Element => {
   switch (editConfig.name) {
@@ -35,6 +20,13 @@ export const getEditComponent = (editConfig: EditComponentProps, keyVal: string)
       return (
         <FormItem key={keyVal} label={editConfig.label}>
           {<AInput editConfig={editConfig} />}
+        </FormItem>
+      )
+    }
+    case EditComponentKey.EDIT_IMAGE_INPUT: {
+      return (
+        <FormItem key={keyVal} label={editConfig.label}>
+          {<AImageInput editConfig={editConfig} />}
         </FormItem>
       )
     }

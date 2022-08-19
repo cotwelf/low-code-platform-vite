@@ -34,10 +34,8 @@ export const pictureSchema = (id: string, defaultStyle: ComponentStyle): Compone
     },
     editConfig: {
       imgSrc: {
-        name: EditComponentKey.EDIT_INPUT,
-        propType: 'textarea',
-        label: '图片url',
-        value: '/default-pic.jpg',
+        name: EditComponentKey.EDIT_IMAGE_INPUT,
+        label: '选择图片',
         callback: null
       }
     },
@@ -48,6 +46,7 @@ export const PicComponent: React.FC<PluginComponentProps> = ({ schema }) => {
   const { props, id } = schema as IPictureComponent
   const { reRender, setReRender } = useContext(context)
   const events = schema?.events
+  // 初始化事件
   useEffect(() => initEvents(events, setReRender, reRender), [events])
   const clickEvents = schema?.events.clickEvents
   const onClickCb = clickEvents?.onClick.callback

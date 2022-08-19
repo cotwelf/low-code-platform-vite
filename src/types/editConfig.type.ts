@@ -1,7 +1,7 @@
-import { EditInputProp } from './editbase.type'
-
+import { EditImageInputProp, EditInputProp } from './editbase.type'
+// 组件编辑器属性格式
 export interface IImageEditConfig {
-  imgSrc: EditInputProp
+  imgSrc: EditImageInputProp
 }
 export interface IButtonEditConfig {
   innerText: EditInputProp
