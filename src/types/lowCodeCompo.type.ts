@@ -8,16 +8,19 @@ export enum ComponentName {
 }
 
 export interface ComponentStyle {
-  position: string
-  top: string
-  left: string
-  width: string
-  height: string
-  zIndex: number
-  textAlign: string
-  color: string
-  backgroundColor: string
-  fontSize: string
+  position?: string
+  top?: string
+  left?: string
+  width?: string
+  height?: string
+  zIndex?: number
+  textAlign?: string
+  color?: string
+  backgroundColor?: string
+  fontSize?: string
+  backgroundImage?: string
+  border?: string
+  outline?: string
 }
 
 export interface IAttribute {

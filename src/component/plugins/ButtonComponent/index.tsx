@@ -1,10 +1,24 @@
 import { EditComponentKey } from '@//types/editbase.type'
-import { ComponentName, ComponentSchema, IButtonComponent, PluginComponentProps } from '@//types/lowCodeCompo.type'
+import { ComponentName, ComponentSchema, ComponentStyle, IButtonComponent, PluginComponentProps } from '@//types/lowCodeCompo.type'
 import { initEvents } from '@//utils/util'
 import { context } from '@//views/preview'
 import React from 'react'
 import { useContext, useEffect } from 'react'
-import { defaultStyle } from '../plugins'
+
+const defaultStyle: ComponentStyle = {
+  position: 'absolute',
+  top: '100px',
+  left: '100px',
+  width: '100px',
+  height: '40px',
+  zIndex: 1,
+  textAlign: 'center',
+  color: '#ffffff',
+  backgroundColor: '#165dff',
+  fontSize: '14px',
+  border: '0',
+  outline: '0',
+}
 
 export const buttonSchema = (id: string): ComponentSchema => {
   return {
@@ -55,22 +69,22 @@ export const buttonSchema = (id: string): ComponentSchema => {
         value: '#ffffff',
         callback: null
       },
-      // width: {
-      //   name: EditComponentKey.EDIT_INPUT,
-      //   type: 'style',
-      //   propType: 'textarea',
-      //   label: '宽度',
-      //   value: this.style.width || 100,
-      //   callback: null
-      // },
-      // height: {
-      //   name: EditComponentKey.EDIT_INPUT,
-      //   type: 'style',
-      //   propType: 'textarea',
-      //   label: '高度',
-      //   value: this.style.height || 100,
-      //   callback: null
-      // },
+      width: {
+        name: EditComponentKey.EDIT_INPUT,
+        type: 'style',
+        propType: 'textarea',
+        label: '宽度',
+        value: '100px',
+        callback: null
+      },
+      height: {
+        name: EditComponentKey.EDIT_INPUT,
+        type: 'style',
+        propType: 'textarea',
+        label: '高度',
+        value: '100px',
+        callback: null
+      },
       // marginTop: {
       //   name: EditComponentKey.EDIT_INPUT,
       //   type: 'style',
@@ -79,7 +93,6 @@ export const buttonSchema = (id: string): ComponentSchema => {
       //   value: this.style.height || 100,
       //   callback: null
       // },
-
     },
     style: { ...defaultStyle }
   }
@@ -103,7 +116,7 @@ export const BtnComponent: React.FC<PluginComponentProps> = ({ schema }) => {
   const dbClickCb = clickEvents?.dbClick.callback
 
   return (
-    <button onClick={onClickCb} onDoubleClick={dbClickCb} key={id} style={style}>
+    <button onClick={onClickCb} onDoubleClick={dbClickCb} key={id} style={{...style, outline: 'none'}}>
       {props.innerText}
     </button>
   )
