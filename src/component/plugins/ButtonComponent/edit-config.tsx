@@ -3,7 +3,7 @@ import { IButtonComponent } from '@//types/lowCodeCompo.type'
 import { Collapse, Form } from '@arco-design/web-react'
 import { useContext, useEffect, useState } from 'react'
 import { getEditComponent } from '../../edit-component/base'
-import { IButtonEditConfig } from '@//types'
+import { IKeyofButtonEditConfig } from '@//types'
 // import { EditInputProp } from './editbase.type'
 
 const CollapseItem = Collapse.Item;
@@ -19,13 +19,17 @@ export const ButtonConfigComponents = () => {
     const styleFormItem: JSX.Element[] = []
     // 遍历 config 动态生成修改部分
     Object.keys(editorConfig).forEach((key) => {
-      const curKey = key as keyof IButtonEditConfig
+      const curKey = key as IKeyofButtonEditConfig
       const configItem = editorConfig[curKey]
-      console.log(configItem, btnCompo.props[curKey])
-      configItem.value = btnCompo.props[curKey]
+      if (!configItem) {
+        return
+      }
+      // console.log(configItem, btnCompo.props[curKey], btnCompo.style[styleKey])
+      const handleObj = configItem.type === 'style' ? btnCompo.style : btnCompo.props
+      const handleObjKey = key as keyof typeof handleObj
+      configItem.value = handleObj[handleObjKey] || ''
       configItem.callback = (val: string) => {
-        btnCompo.props[curKey] = val
-
+        handleObj[handleObjKey] = val
         // 修改render使得页面数据刷新
         setReRender?.(() => {
           return !reRender
@@ -42,7 +46,6 @@ export const ButtonConfigComponents = () => {
       attr: attrFormItem,
       style: styleFormItem,
     })
-    console.log(formItems?.attr)
   }, [JSON.stringify(editingCompo?.editConfig)])
 
   return <Collapse
