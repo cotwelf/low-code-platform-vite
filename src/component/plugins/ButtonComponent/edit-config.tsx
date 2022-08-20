@@ -24,7 +24,6 @@ export const ButtonConfigComponents = () => {
       if (!configItem) {
         return
       }
-      // console.log(configItem, btnCompo.props[curKey], btnCompo.style[styleKey])
       const handleObj = configItem.type === 'style' ? btnCompo.style : btnCompo.props
       const handleObjKey = key as keyof typeof handleObj
       configItem.value = handleObj[handleObjKey] || ''
