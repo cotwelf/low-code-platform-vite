@@ -3,7 +3,9 @@ import { NavigateFunction } from 'react-router'
 import Strapi from 'strapi-sdk-js'
 import { ComponentSchema } from '../types/lowCodeCompo.type'
 
-const strapi = new Strapi()
+const strapi = new Strapi({
+  url: 'http://49.235.85.170:1337'
+})
 
 // 返回的数据格式
 interface IResponseData {
