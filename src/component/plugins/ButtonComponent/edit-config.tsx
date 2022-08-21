@@ -45,7 +45,7 @@ export const ButtonConfigComponents = () => {
       attr: attrFormItem,
       style: styleFormItem,
     })
-  }, [JSON.stringify(editingCompo?.editConfig)])
+  }, [JSON.stringify(editingCompo)])
 
   return <Collapse
   defaultActiveKey={['style', 'attr']}
