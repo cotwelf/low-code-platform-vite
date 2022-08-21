@@ -26,7 +26,7 @@ export const ButtonConfigComponents = () => {
       }
       const handleObj = configItem.type === 'style' ? btnCompo.style : btnCompo.props
       const handleObjKey = key as keyof typeof handleObj
-      configItem.value = handleObj[handleObjKey]
+      configItem.value = handleObj[handleObjKey]?.toString()
       configItem.callback = (val: string) => {
         handleObj[handleObjKey] = val
         // 修改render使得页面数据刷新
