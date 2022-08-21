@@ -7,7 +7,8 @@ import { getEditComponent } from '../../edit-component/base'
 // import { EditInputProp } from './editbase.type'
 // 获取并配置Video组件的编辑栏
 export const VideoConfigComponents = () => {
-  const { editingCompo, reRender, setReRender } = useContext(context)
+  const { editingCompo, setReRender } = useContext(context)
+  let { reRender } = useContext(context)
   const [formItems, setFormItems] = useState<Array<JSX.Element>>([])
   const videoCompo = editingCompo as IVideoComponent
   // const imageConfig = editorConfig.imgSrc
@@ -24,9 +25,8 @@ export const VideoConfigComponents = () => {
         videoCompo.props[curKey] = val
 
         // 修改render使得页面数据刷新
-        setReRender?.(() => {
-          return !reRender
-        })
+        reRender = !reRender
+        setReRender?.(reRender)
       }
       const formItem = getEditComponent(configItem, key)
       tempFormItem.push(formItem)

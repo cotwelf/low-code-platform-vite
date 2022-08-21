@@ -6,14 +6,15 @@ import { getEditComponent } from '../../edit-component/base'
 import { EditInputProp, IKeyofButtonEditConfig } from '@//types'
 // import { EditInputProp } from './editbase.type'
 
-const CollapseItem = Collapse.Item;
+const CollapseItem = Collapse.Item
 // 获取并配置 button 组件的编辑栏
 export const ButtonConfigComponents = () => {
-  const { editingCompo, setEditingCompo, reRender, setReRender } = useContext(context)
-  const [formItems, setFormItems] = useState<{attr: JSX.Element[], style: JSX.Element[]} | null>(null)
+  const { editingCompo, setEditingCompo, setReRender } = useContext(context)
+  let { reRender } = useContext(context)
+  const [formItems, setFormItems] = useState<{ attr: JSX.Element[]; style: JSX.Element[] } | null>(null)
 
   useEffect(() => {
-    const btnCompo = {...editingCompo} as IButtonComponent
+    const btnCompo = { ...editingCompo } as IButtonComponent
     const editorConfig = btnCompo.editConfig
     const attrFormItem: JSX.Element[] = []
     const styleFormItem: JSX.Element[] = []
@@ -30,9 +31,8 @@ export const ButtonConfigComponents = () => {
       configItem.callback = (val: string) => {
         handleObj[handleObjKey] = val
         // 修改render使得页面数据刷新
-        setReRender?.(() => {
-          return !reRender
-        })
+        reRender = !reRender
+        setReRender?.(reRender)
       }
       const formItem = getEditComponent(configItem, key)
       if (configItem.type === 'attribute') {
@@ -47,19 +47,18 @@ export const ButtonConfigComponents = () => {
     setEditingCompo(btnCompo)
     setFormItems({
       attr: attrFormItem,
-      style: styleFormItem,
+      style: styleFormItem
     })
   }, [JSON.stringify(editingCompo)])
 
-  return <Collapse
-  defaultActiveKey={['style', 'attr']}
-  expandIconPosition='right'
->
-  <CollapseItem header='通用样式' name={'style'}>
-    <Form className={'style-config'}>{formItems?.style}</Form>
-  </CollapseItem>
-  <CollapseItem header='属性设置' name={'attr'}>
-    <Form className={'attr-config'}>{formItems?.attr}</Form>
-  </CollapseItem>
-</Collapse>
+  return (
+    <Collapse defaultActiveKey={['style', 'attr']} expandIconPosition="right">
+      <CollapseItem header="通用样式" name={'style'}>
+        <Form className={'style-config'}>{formItems?.style}</Form>
+      </CollapseItem>
+      <CollapseItem header="属性设置" name={'attr'}>
+        <Form className={'attr-config'}>{formItems?.attr}</Form>
+      </CollapseItem>
+    </Collapse>
+  )
 }

@@ -1,6 +1,6 @@
 import { IFCShapeProps, IShapeCommonStyle } from '@//types/shape.type'
 import { context } from '@//views/editor'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 // 定义方向
 const directionKey = {
@@ -13,10 +13,13 @@ const points = ['lt', 'rt', 'lb', 'rb', 'l', 'r', 't', 'b']
 
 // 类似于遮罩,将组件包含在其中,并且实现拖拽和拉伸功能
 export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
-  const { editingCompo } = useContext(context)
-  const { component, setReRender, children } = props
-  let reRender = props.reRender
-  const active = component === editingCompo
+  const { editingCompo, setReRender } = useContext(context)
+  let { reRender } = useContext(context)
+  const { component, children } = props
+  const [active, setActive] = useState(false)
+  useEffect(() => {
+    setActive(component.id === editingCompo?.id)
+  }, [editingCompo])
   const style = component?.style
   const position: IShapeCommonStyle = {
     top: parseInt(style.top || '0'),
@@ -163,8 +166,10 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
       component.style.height = pos.height + 'px'
       component.style.width = pos.width + 'px'
       // 重新渲染
+
       reRender = !reRender
-      setReRender(reRender)
+      setReRender?.(reRender)
+      console.log(reRender)
     }
   }
 
