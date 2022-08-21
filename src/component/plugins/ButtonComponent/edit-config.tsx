@@ -9,11 +9,11 @@ import { EditInputProp, IKeyofButtonEditConfig } from '@//types'
 const CollapseItem = Collapse.Item;
 // 获取并配置 button 组件的编辑栏
 export const ButtonConfigComponents = () => {
-  const { editingCompo, reRender, setReRender } = useContext(context)
+  const { editingCompo, setEditingCompo, reRender, setReRender } = useContext(context)
   const [formItems, setFormItems] = useState<{attr: JSX.Element[], style: JSX.Element[]} | null>(null)
-  const btnCompo = { ...editingCompo } as IButtonComponent
 
   useEffect(() => {
+    const btnCompo = {...editingCompo} as IButtonComponent
     const editorConfig = btnCompo.editConfig
     const attrFormItem: JSX.Element[] = []
     const styleFormItem: JSX.Element[] = []
@@ -41,6 +41,10 @@ export const ButtonConfigComponents = () => {
         styleFormItem.push(formItem)
       }
     })
+    if (!setEditingCompo) {
+      return
+    }
+    setEditingCompo(btnCompo)
     setFormItems({
       attr: attrFormItem,
       style: styleFormItem,
