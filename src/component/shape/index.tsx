@@ -150,7 +150,6 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
     const up = () => {
       document.removeEventListener('mousemove', move, true)
       document.removeEventListener('mouseup', up, true)
-      console.log(editingCompo === component, '是否相同呢')
     }
     document.addEventListener('mousemove', move, true)
     document.addEventListener('mouseup', up, true)
