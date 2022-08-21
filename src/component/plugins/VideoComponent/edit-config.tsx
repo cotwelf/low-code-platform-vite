@@ -9,7 +9,7 @@ import { getEditComponent } from '../../edit-component/base'
 export const VideoConfigComponents = () => {
   const { editingCompo, reRender, setReRender } = useContext(context)
   const [formItems, setFormItems] = useState<Array<JSX.Element>>([])
-  const videoCompo = { ...editingCompo } as IVideoComponent
+  const videoCompo = editingCompo as IVideoComponent
   // const imageConfig = editorConfig.imgSrc
   // 遍历config动态生成修改部分
 

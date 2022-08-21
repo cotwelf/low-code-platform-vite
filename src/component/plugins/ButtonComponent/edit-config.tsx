@@ -9,7 +9,7 @@ import { IButtonEditConfig } from '@//types'
 export const ButtonConfigComponents = () => {
   const { editingCompo, reRender, setReRender } = useContext(context)
   const [formItems, setFormItems] = useState<Array<JSX.Element>>([])
-  const btnCompo = { ...editingCompo } as IButtonComponent
+  const btnCompo = editingCompo as IButtonComponent
 
   useEffect(() => {
     const editorConfig = btnCompo.editConfig
@@ -21,6 +21,7 @@ export const ButtonConfigComponents = () => {
       configItem.value = btnCompo.props[curKey]
       configItem.callback = (val: string) => {
         btnCompo.props[curKey] = val
+
         // 修改render使得页面数据刷新
         setReRender?.(() => {
           return !reRender
@@ -30,7 +31,7 @@ export const ButtonConfigComponents = () => {
       tempFormItem.push(formItem)
     })
     setFormItems(tempFormItem)
-  }, [JSON.stringify(editingCompo?.editConfig)])
+  }, [JSON.stringify(editingCompo)])
 
   return <Form>{formItems}</Form>
 }
