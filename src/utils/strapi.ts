@@ -4,7 +4,7 @@ import Strapi from 'strapi-sdk-js'
 import { ComponentSchema } from '../types/lowCodeCompo.type'
 
 const strapi = new Strapi({
-  url: 'https://49.235.85.170:1337'
+  url: 'http://49.235.85.170:1337'
 })
 
 // 返回的数据格式

@@ -20,7 +20,7 @@ export const AVideoInput: React.FC<EditConfig> = ({ editConfig }) => {
     if (video) {
       const formData = new FormData()
       formData.append('files', video)
-      axios.post('http://localhost:1337/api/upload', formData).then(
+      axios.post(API_URL + '/api/upload', formData).then(
         () => {
           Message.success('上传成功')
           getVideos()
@@ -41,7 +41,7 @@ export const AVideoInput: React.FC<EditConfig> = ({ editConfig }) => {
 
   //   获取所有视频
   function getVideos() {
-    axios.get('http://localhost:1337/api/upload/files').then(
+    axios.get(API_URL + '/api/upload/files').then(
       (res) => {
         if (res.data) {
           const videos = (res.data as IResponseMedias[]).filter((item) => /^video\/*/.test(item.mime))
