@@ -48,6 +48,7 @@ export function Editor() {
       // 获取页面数据
       findPage(+params.id).then(
         (components) => {
+          console.log(components, 'components')
           setComponents(components)
         },
         () => {

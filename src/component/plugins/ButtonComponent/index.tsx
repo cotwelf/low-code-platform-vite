@@ -7,8 +7,6 @@ import { useContext, useEffect } from 'react'
 
 const defaultStyle: ComponentStyle = {
   position: 'absolute',
-  top: '100px',
-  left: '100px',
   width: '100px',
   height: '40px',
   zIndex: 1,
@@ -18,6 +16,7 @@ const defaultStyle: ComponentStyle = {
   fontSize: '14px',
   border: '0',
   outline: '0',
+  borderRadius: '4px',
 }
 
 export const buttonSchema = (id: string): ComponentSchema => {
@@ -26,8 +25,6 @@ export const buttonSchema = (id: string): ComponentSchema => {
     name: ComponentName.ButtonComponent,
     props: {
       innerText: 'button',
-      backgroundColor: '#165dff',
-      color: '#ffffff',
     },
     events: {
       type: ['alert', 'openUrl', 'null'],
@@ -50,7 +47,6 @@ export const buttonSchema = (id: string): ComponentSchema => {
         type: 'attribute',
         propType: 'textarea',
         label: '按钮文字',
-        value: 'button',
         callback: null
       },
       backgroundColor: {
@@ -58,7 +54,6 @@ export const buttonSchema = (id: string): ComponentSchema => {
         type: 'style',
         propType: 'color',
         label: '背景颜色',
-        value: '#165dff',
         callback: null
       },
       color: {
@@ -66,7 +61,6 @@ export const buttonSchema = (id: string): ComponentSchema => {
         type: 'style',
         propType: 'color',
         label: '字体颜色',
-        value: '#ffffff',
         callback: null
       },
       width: {
@@ -74,7 +68,6 @@ export const buttonSchema = (id: string): ComponentSchema => {
         type: 'style',
         propType: 'textarea',
         label: '宽度',
-        value: '100px',
         callback: null
       },
       height: {
@@ -82,30 +75,32 @@ export const buttonSchema = (id: string): ComponentSchema => {
         type: 'style',
         propType: 'textarea',
         label: '高度',
-        value: '100px',
         callback: null
       },
-      // marginTop: {
-      //   name: EditComponentKey.EDIT_INPUT,
-      //   type: 'style',
-      //   propType: 'textarea',
-      //   label: '宽度',
-      //   value: this.style.height || 100,
-      //   callback: null
-      // },
+      borderRadius: {
+        name: EditComponentKey.EDIT_INPUT,
+        type: 'style',
+        propType: 'textarea',
+        label: '圆角',
+        callback: null
+      },
     },
     style: { ...defaultStyle }
   }
 }
 
 export const BtnComponent: React.FC<PluginComponentProps> = ({ schema }) => {
-  const { props, id } = schema as IButtonComponent
-  const style = {
+  const { props, id, style } = schema as IButtonComponent
+  const styleObj = {
+    // ...style,
     height: '100%',
     width: '100%',
-    backgroundColor: props.backgroundColor,
-    color: props.color,
-    cursor: 'pointer'
+    backgroundColor: style.backgroundColor,
+    color: style.color,
+    cursor: 'pointer',
+    borderRadius: style.borderRadius,
+    border: '0',
+    outline: '0',
   }
   const { reRender, setReRender } = useContext(context)
   const events = schema?.events
@@ -116,7 +111,7 @@ export const BtnComponent: React.FC<PluginComponentProps> = ({ schema }) => {
   const dbClickCb = clickEvents?.dbClick.callback
 
   return (
-    <button onClick={onClickCb} onDoubleClick={dbClickCb} key={id} style={{...style, outline: 'none'}}>
+    <button onClick={onClickCb} onDoubleClick={dbClickCb} key={id} style={styleObj}>
       {props.innerText}
     </button>
   )

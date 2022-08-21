@@ -21,6 +21,7 @@ export interface ComponentStyle {
   backgroundImage?: string
   border?: string
   outline?: string
+  borderRadius?: string
 }
 
 export interface IAttribute {
@@ -56,9 +57,7 @@ export interface IButtonComponent {
   id: string
   name: ComponentName.ButtonComponent
   props: {
-    innerText: string
-    backgroundColor: string
-    color: string
+    [innerText: string]: string
   }
 
   events: {

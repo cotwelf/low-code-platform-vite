@@ -5,7 +5,7 @@ export interface IImageEditConfig {
 }
 
 export type IKeyofButtonEditConfig = 'innerText' | 'backgroundColor' | 'color' | 'width'
-  | 'height' | 'border'
+  | 'height' | 'borderRadius'
 export type IButtonEditConfig = {
   [key in IKeyofButtonEditConfig]?: EditInputProp
 }
