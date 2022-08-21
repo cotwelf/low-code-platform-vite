@@ -1,10 +1,11 @@
 import { Message } from '@arco-design/web-react'
 import { NavigateFunction } from 'react-router'
 import Strapi from 'strapi-sdk-js'
+import { API_URL } from '../constants/env'
 import { ComponentSchema } from '../types/lowCodeCompo.type'
 
 const strapi = new Strapi({
-  url: 'http://49.235.85.170:1337'
+  url: API_URL
 })
 
 // 返回的数据格式

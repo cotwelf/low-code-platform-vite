@@ -3,10 +3,11 @@ import { EditMediaInputProp, EditInputProp } from './editbase.type'
 export interface IImageEditConfig {
   imgSrc: EditMediaInputProp
 }
-export interface IButtonEditConfig {
-  innerText: EditInputProp
-  backgroundColor: EditInputProp
-  color: EditInputProp
+
+export type IKeyofButtonEditConfig = 'innerText' | 'backgroundColor' | 'color' | 'width'
+  | 'height' | 'borderRadius'
+export type IButtonEditConfig = {
+  [key in IKeyofButtonEditConfig]?: EditInputProp
 }
 
 export interface IVideoEditConfig {
