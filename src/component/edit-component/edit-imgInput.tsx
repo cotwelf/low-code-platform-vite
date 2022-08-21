@@ -16,7 +16,7 @@ export const AImageInput: React.FC<EditConfig> = ({ editConfig }) => {
     if (image) {
       const formData = new FormData()
       formData.append('files', image)
-      axios.post('http://localhost:1337/api/upload', formData).then(
+      axios.post(API_URL + '/api/upload', formData).then(
         () => {
           Message.success('上传成功')
           getImages()
@@ -39,7 +39,7 @@ export const AImageInput: React.FC<EditConfig> = ({ editConfig }) => {
 
   //   获取所有图片
   function getImages() {
-    axios.get('http://localhost:1337/api/upload/files').then(
+    axios.get(API_URL + '/api/upload/files').then(
       (res) => {
         if (res.data) {
           const images = (res.data as IResponseMedias[]).filter((item) => /^image\/*/.test(item.mime))
