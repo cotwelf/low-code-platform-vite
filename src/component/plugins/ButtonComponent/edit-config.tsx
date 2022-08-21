@@ -3,7 +3,7 @@ import { IButtonComponent } from '@//types/lowCodeCompo.type'
 import { Collapse, Form } from '@arco-design/web-react'
 import { useContext, useEffect, useState } from 'react'
 import { getEditComponent } from '../../edit-component/base'
-import { IKeyofButtonEditConfig } from '@//types'
+import { EditInputProp, IKeyofButtonEditConfig } from '@//types'
 // import { EditInputProp } from './editbase.type'
 
 const CollapseItem = Collapse.Item;
@@ -20,7 +20,7 @@ export const ButtonConfigComponents = () => {
     // 遍历 config 动态生成修改部分
     Object.keys(editorConfig).forEach((key) => {
       const curKey = key as IKeyofButtonEditConfig
-      const configItem = editorConfig[curKey]
+      const configItem: EditInputProp | undefined = editorConfig[curKey]
       if (!configItem) {
         return
       }
