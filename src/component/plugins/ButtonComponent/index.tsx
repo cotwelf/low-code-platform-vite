@@ -4,6 +4,7 @@ import { initEvents } from '@//utils/util'
 import { context } from '@//views/preview'
 import React from 'react'
 import { useContext, useEffect } from 'react'
+import './main.scss'
 
 const defaultStyle: ComponentStyle = {
   position: 'absolute',

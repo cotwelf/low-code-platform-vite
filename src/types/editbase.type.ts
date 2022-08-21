@@ -11,7 +11,7 @@ export interface EditInputProp {
   type?: 'attribute' | 'style'
   propType: string
   label: string
-  value?: string
+  value?: string | number
   callback: null | ((val: string) => void)
 }
 
