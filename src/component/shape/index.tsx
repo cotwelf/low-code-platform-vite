@@ -19,10 +19,10 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
   const active = component === editingCompo
   const style = component?.style
   const position: IShapeCommonStyle = {
-    top: parseInt(style.top),
-    left: parseInt(style.left),
-    width: parseInt(style.width),
-    height: parseInt(style.height)
+    top: parseInt(style.top || '0'),
+    left: parseInt(style.left || '0'),
+    width: parseInt(style.width || '0'),
+    height: parseInt(style.height || '0')
   }
 
   // 获取伸缩点的样式
