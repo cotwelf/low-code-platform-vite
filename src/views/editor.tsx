@@ -28,10 +28,12 @@ export const context = React.createContext<
     setEditingCompo: Dispatch<ComponentSchema | null>
     reRender: boolean
     setReRender: Dispatch<boolean>
-    clone: (conKey: ComponentName) => void
+    clone: (conKey: ComponentName, schema?: ComponentSchema) => void
     pageInfo: IPageInfo | null
     setPageInfo: Dispatch<IPageInfo | null>
     params: Readonly<Params<string>>
+    menuPos: number[]
+    setMenuPos: React.Dispatch<React.SetStateAction<number[]>>
   }>
 >({})
 
@@ -40,6 +42,7 @@ export function Editor() {
   const [editingCompo, setEditingCompo] = useState<ComponentSchema | null>(null)
   const [reRender, setReRender] = useState(false)
   const [pageInfo, setPageInfo] = useState<IPageInfo | null>(null)
+  const [menuPos, setMenuPos] = useState<number[]>([])
   const params = useParams()
   const navigate = useNavigate()
 
@@ -58,9 +61,25 @@ export function Editor() {
     }
   }, [params.id])
   // 添加组件数据至数组中
-  const clone = (conKey: ComponentName) => {
-    const schema = getComponentSchema(conKey)
-    setComponents((components) => [...components, schema])
+  const clone = (conKey: ComponentName, schema?: ComponentSchema) => {
+    if (!schema) {
+      const schema = getComponentSchema(conKey)
+      setComponents((components) => [...components, schema])
+    } else {
+      const newComponents = components.slice()
+      const copyComponent = JSON.parse(JSON.stringify(schema)) as ComponentSchema
+      console.log(copyComponent)
+
+      if (copyComponent.style.top && copyComponent.style.left) {
+        copyComponent.id = new Date().getTime().toString()
+        console.log(copyComponent.style)
+        copyComponent.style.top = parseInt(copyComponent.style.top) + 20 + 'px'
+        copyComponent.style.left = parseInt(copyComponent.style.left) + 20 + 'px'
+
+        newComponents.push(copyComponent)
+        setComponents(newComponents)
+      }
+    }
   }
 
   return (
@@ -75,7 +94,9 @@ export function Editor() {
         clone,
         pageInfo,
         setPageInfo,
-        params
+        params,
+        menuPos,
+        setMenuPos
       }}
     >
       <LowCodeHeader />

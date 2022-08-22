@@ -166,15 +166,16 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
       component.style.height = pos.height + 'px'
       component.style.width = pos.width + 'px'
       // 重新渲染
+      console.log('移动种')
 
       reRender = !reRender
       setReRender?.(reRender)
-      console.log(reRender)
     }
   }
 
   return (
     <div
+      className="element-on-edit-canvas"
       onMouseDown={(e) => mouseDownForElement(e)}
       style={{ outline: active ? '1px dashed #bcbcbc' : '', height: '100%', width: '100%' }}
     >

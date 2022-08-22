@@ -10,7 +10,6 @@ const Option = Select.Option
 // 采用对话框编辑属性
 export const AVideoInput: React.FC<EditConfig> = ({ editConfig }) => {
   const [visible, setVisible] = useState(false)
-  console.warn('防止报错', editConfig)
   const [video, setVideo] = useState<File | null>()
   const [videoUrls, setVideoUrls] = useState<IResponseMedias[] | null>([])
   const [selectedUrl, setSelectedUrl] = useState<string | undefined>()
