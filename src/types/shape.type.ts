@@ -1,12 +1,12 @@
-import React from 'react'
 import { ComponentSchema } from './lowCodeCompo.type'
 
+/**
+ * component:shape包裹的plugin
+ * children: plugin组件
+ */
 export interface IFCShapeProps {
   component: ComponentSchema
-  editingCompo: ComponentSchema | null | undefined
-  reRender: boolean | undefined
   children: JSX.Element
-  setReRender: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface IShapeCommonStyle {

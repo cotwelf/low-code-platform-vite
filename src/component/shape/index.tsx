@@ -166,7 +166,6 @@ export const Shape: React.FC<IFCShapeProps> = (props: IFCShapeProps) => {
       component.style.height = pos.height + 'px'
       component.style.width = pos.width + 'px'
       // 重新渲染
-      console.log('移动种')
 
       reRender = !reRender
       setReRender?.(reRender)

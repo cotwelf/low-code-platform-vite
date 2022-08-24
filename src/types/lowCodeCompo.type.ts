@@ -1,12 +1,14 @@
-// import { DraggableItemKey } from '../constants/plugin-icon-list'
+//定义plugin属性结构
 import { IButtonEditConfig, IImageEditConfig, IVideoEditConfig } from './editConfig.type'
 
+// 枚举所有的组件
 export enum ComponentName {
   PictureComponent = 'PictureComponent',
   ButtonComponent = 'ButtonComponent',
   VideoComponent = 'VideoComponent'
 }
 
+//组件样式数据
 export interface ComponentStyle {
   position?: string
   top?: string
@@ -24,8 +26,20 @@ export interface ComponentStyle {
   borderRadius?: string
 }
 
-export interface IAttribute {
-  innerText?: string
+export interface IEventProps {
+  type: string[]
+  clickEvents: {
+    onClick: {
+      callback: React.MouseEventHandler<HTMLElement> | undefined
+      actionType: string
+      val: string
+    }
+    dbClick: {
+      callback: React.MouseEventHandler<HTMLElement> | undefined
+      actionType: string
+      val: string
+    }
+  }
 }
 
 export interface IPictureComponent {
@@ -34,21 +48,7 @@ export interface IPictureComponent {
   props: {
     imgSrc: string
   }
-  events: {
-    type: string[]
-    clickEvents: {
-      onClick: {
-        callback: React.MouseEventHandler<HTMLElement> | undefined
-        actionType: string
-        val: string
-      }
-      dbClick: {
-        callback: React.MouseEventHandler<HTMLElement> | undefined
-        actionType: string
-        val: string
-      }
-    }
-  }
+  events: IEventProps
   // 编辑器的属性
   editConfig: IImageEditConfig
   style: ComponentStyle
@@ -60,21 +60,7 @@ export interface IButtonComponent {
     [innerText: string]: string
   }
 
-  events: {
-    type: string[]
-    clickEvents: {
-      onClick: {
-        callback: React.MouseEventHandler<HTMLElement> | undefined
-        actionType: string
-        val: ''
-      }
-      dbClick: {
-        callback: React.MouseEventHandler<HTMLElement> | undefined
-        actionType: string
-        val: ''
-      }
-    }
-  }
+  events: IEventProps
   // 编辑器的属性
   editConfig: IButtonEditConfig
   style: ComponentStyle
@@ -88,22 +74,7 @@ export interface IVideoComponent {
     poster: string
     // controlBar: boolean
   }
-
-  events: {
-    type: string[]
-    clickEvents: {
-      onClick: {
-        callback: React.MouseEventHandler<HTMLElement> | undefined
-        actionType: string
-        val: ''
-      }
-      dbClick: {
-        callback: React.MouseEventHandler<HTMLElement> | undefined
-        actionType: string
-        val: ''
-      }
-    }
-  }
+  events: IEventProps
   // 编辑器的属性
   editConfig: IVideoEditConfig
   style: ComponentStyle

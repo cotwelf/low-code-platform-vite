@@ -15,6 +15,7 @@ import { AInput } from './edit-input'
 import { AVideoInput } from './edit-videoInput'
 const FormItem = Form.Item
 
+// 根据枚举值来生成编辑器Item
 export const getEditComponent = (editConfig: EditComponentProps, keyVal: string): JSX.Element => {
   switch (editConfig.name) {
     case EditComponentKey.EDIT_INPUT: {

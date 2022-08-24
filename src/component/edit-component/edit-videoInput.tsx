@@ -31,7 +31,7 @@ export const AVideoInput: React.FC<EditConfig> = ({ editConfig }) => {
     }
   }
 
-  //   设置上传图片
+  //   设置上传视频
   function onVideoChange(e: ChangeEvent<HTMLInputElement>) {
     if (e?.target.files) {
       setVideo(e.target.files[0])
@@ -53,10 +53,10 @@ export const AVideoInput: React.FC<EditConfig> = ({ editConfig }) => {
     )
   }
 
-  // 更新图片库
+  // 更新视频库
   function updateVideo() {
     if (selectedUrl === undefined) {
-      Message.warning('请先选择一个图片')
+      Message.warning('请先选择一个视频')
       return
     } else if (editConfig.callback) {
       editConfig.callback(selectedUrl)

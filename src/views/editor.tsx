@@ -16,10 +16,9 @@ import Content from '@arco-design/web-react/es/Layout/content'
 import { Params, useNavigate, useParams } from 'react-router'
 import { createPage, findPage } from '../utils/strapi'
 
-// const TabPane = Tabs.TabPane
-
 type Dispatch<T> = React.Dispatch<React.SetStateAction<T>>
 
+// 采用context来进行数据交互
 export const context = React.createContext<
   Partial<{
     components: ComponentSchema[]
@@ -62,17 +61,18 @@ export function Editor() {
   }, [params.id])
   // 添加组件数据至数组中
   const clone = (conKey: ComponentName, schema?: ComponentSchema) => {
+    // 添加组件
     if (!schema) {
       const schema = getComponentSchema(conKey)
       setComponents((components) => [...components, schema])
-    } else {
+    }
+    // 复制组件
+    else {
       const newComponents = components.slice()
       const copyComponent = JSON.parse(JSON.stringify(schema)) as ComponentSchema
-      console.log(copyComponent)
 
       if (copyComponent.style.top && copyComponent.style.left) {
         copyComponent.id = new Date().getTime().toString()
-        console.log(copyComponent.style)
         copyComponent.style.top = parseInt(copyComponent.style.top) + 20 + 'px'
         copyComponent.style.left = parseInt(copyComponent.style.left) + 20 + 'px'
 

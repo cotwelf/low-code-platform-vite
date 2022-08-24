@@ -8,7 +8,7 @@ export interface DragButtonProps {
   cb: (conKey: ComponentName) => void
   index: number
 }
-
+// 拖拽功能
 export function DragButton(props: DragButtonProps) {
   const { compoIcon, index } = props
   const [{ isDragging }, drag] = useDrag(() => ({

@@ -1,3 +1,4 @@
+// iterate IconList
 import { ComponentName } from '../types/lowCodeCompo.type'
 import { IPluginListIcon } from '../types/pluginList.type'
 

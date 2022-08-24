@@ -1,7 +1,11 @@
-// 右侧编辑栏的base组件属性
+// 右侧编辑栏的编辑器组件属性
+/**
+ * name:编辑器名称
+ * label:属性名称
+ * callback:回调修改组件的值
+ */
 export enum EditComponentKey {
   EDIT_INPUT = 'a-input',
-  EDIT_BUTTON = 'a-button',
   EDIT_IMAGE_INPUT = 'a-image-input',
   EDIT_VIDEO_INPUT = 'a-video-input'
 }

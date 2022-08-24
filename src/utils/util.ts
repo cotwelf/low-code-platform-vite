@@ -1,5 +1,6 @@
 import { ComponentSchema } from '@//types/lowCodeCompo.type'
 import { Message } from '@arco-design/web-react'
+// 初始化自定义事件
 export const initEvents = (
   events: ComponentSchema['events'] | undefined,
   setReRender: React.Dispatch<boolean> | undefined,

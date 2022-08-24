@@ -2,6 +2,8 @@ import { context } from '@//views/editor'
 import { Menu } from '@arco-design/web-react'
 import { MouseEvent, useContext } from 'react'
 const MenuItem = Menu.Item
+
+// 右键时出现的MenuBar
 export function ContextMenu() {
   const { editingCompo, clone, menuPos, setMenuPos, components, setComponents } = useContext(context)
   function clickMenu(key: string) {
